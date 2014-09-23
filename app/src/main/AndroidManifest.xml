@@ -16,6 +16,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Map"
+            android:label="@string/title_activity_map" >
+        </activity>
+        <activity
+            android:name=".Store"
+            android:label="@string/title_activity_store" >
+        </activity>
+        <activity
+            android:name=".Settings"
+            android:label="@string/title_activity_settings" >
+        </activity>
+        <activity
+            android:name=".Inventory"
+            android:label="@string/title_activity_inventory" >
+        </activity>
     </application>
 
 </manifest>
