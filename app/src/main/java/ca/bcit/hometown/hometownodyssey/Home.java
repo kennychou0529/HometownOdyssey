@@ -1,9 +1,11 @@
 package ca.bcit.hometown.hometownodyssey;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class Home extends Activity {
@@ -33,4 +35,57 @@ public class Home extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    /**
+     * Starts the Map activity
+     *
+     * @param view the initiating view
+     */
+    public void startActivityMap(View view) {
+        Intent intent = new Intent(this, Map.class);
+
+        startActivity(intent);
+
+        return;
+    }
+
+    /**
+     * Starts the Inventory activity
+     *
+     * @param view the initiating view
+     */
+    public void startActivityInventory(View view) {
+        Intent intent = new Intent(this, Inventory.class);
+
+        startActivity(intent);
+
+        return;
+    }
+
+    /**
+     * Starts the Store activity
+     *
+     * @param view the initiating view
+     */
+    public void startActivityShop(View view) {
+        Intent intent = new Intent(this, Store.class);
+
+        startActivity(intent);
+
+        return;
+    }
+
+    /**
+     * Starts the Map activity
+     *
+     * @param view the initiating view
+     */
+    public void startActivitySettings(View view) {
+        Intent intent = new Intent(this, Settings.class);
+
+        startActivity(intent);
+
+        return;
+    }
+
 }
