@@ -32,9 +32,7 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
         gps = new GPSTracker(Map.this);
 
         //Check if GPS is up and running
-        if(gps.canGetLocation()){
-
-
+        if(gps.canGetLocation()) {
 
             //Create the maps object and initalize it
             GoogleMap map = ((MapFragment) getFragmentManager()
