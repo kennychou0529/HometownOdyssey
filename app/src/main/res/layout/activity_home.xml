@@ -19,6 +19,7 @@
         android:layout_column="0"
         android:layout_marginRight="@dimen/home_button_margin"
         android:layout_marginBottom="@dimen/home_button_margin" />
+
     <Button
         android:text="@string/button_inventory"
         android:background="@drawable/shape"
