@@ -4,20 +4,14 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:columnCount="2"
-    android:rowCount="2"
+    android:rowCount="3"
     android:orientation="horizontal"
     tools:context=".Home"
-    android:paddingStart="0dp"
-    android:paddingEnd="0dp"
     android:useDefaultMargins="false">
 
-    <!--<fragment android:name="ca.bcit.hometown.hometownodyssey.AdventureFragment"-->
-              <!--android:id="@+id/adventure_fragment"-->
-              <!--android:layout_width="wrap_content"-->
-              <!--android:layout_height="wrap_content"-->
-              <!--tools:layout="@layout/fragment_adventure" />-->
     <Button
         android:text="@string/button_map"
+        android:background="@drawable/shape"
         android:layout_width="110dp"
         android:layout_height="100dp"
         android:onClick="startActivityMap"
@@ -27,6 +21,7 @@
         android:layout_marginBottom="@dimen/home_button_margin" />
     <Button
         android:text="@string/button_inventory"
+        android:background="@drawable/shape"
         android:layout_width="110dp"
         android:layout_height="100dp"
         android:onClick="startActivityInventory"
@@ -35,6 +30,7 @@
 
     <Button
         android:text="@string/button_store"
+        android:background="@drawable/shape"
         android:layout_width="110dp"
         android:layout_height="100dp"
         android:onClick="startActivityShop"
@@ -43,10 +39,22 @@
 
     <Button
         android:text="@string/button_settings"
+        android:background="@drawable/shape"
         android:layout_width="110dp"
         android:layout_height="100dp"
         android:onClick="startActivitySettings"
         android:layout_row="1"
         android:layout_column="1" />
+
+    <fragment android:name="ca.bcit.hometown.hometownodyssey.AdventureFragment"
+              android:id="@+id/adventure_fragment"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              tools:layout="@layout/fragment_adventure"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_row="2"
+        android:layout_column="0"
+        android:layout_rowSpan="1"
+        android:layout_columnSpan="2" />
 
 </GridLayout>
