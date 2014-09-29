@@ -50,7 +50,7 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
             // Auto becomes the min or max.
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 17));
             map.addMarker(new MarkerOptions().position(new LatLng(latitude + 0.003, longitude + 0.003)).title("Hello!").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-            map.addMarker(new MarkerOptions().position(new LatLng(latitude + 0.0001, longitude + 0.001)).title("Derp").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+            map.addMarker(new MarkerOptions().position(new LatLng(latitude + 0.0001, longitude + 0.001)).title("Derp").icon(BitmapDescriptorFactory.fromResource(R.drawable.chest)));
 
 
             Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
