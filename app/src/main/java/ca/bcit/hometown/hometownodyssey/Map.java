@@ -1,5 +1,6 @@
 package ca.bcit.hometown.hometownodyssey;
 
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -12,8 +13,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import static android.graphics.Color.HSVToColor;
 
 
 public class Map extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks,
@@ -34,13 +39,13 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
         //Check if GPS is up and running
         if(gps.canGetLocation()) {
 
-            //Create the maps object and initalize it
+            //Create the maps object and initialize it
             GoogleMap map = ((MapFragment) getFragmentManager()
                     .findFragmentById(R.id.map)).getMap();
 
             map.setMyLocationEnabled(true);
 
-            //Get current latitude and logitude
+            //Get current latitude and longitude
             double latitude = gps.getLatitude();
             double longitude = gps.getLongitude();
             LatLng current = new LatLng(latitude, longitude);
@@ -52,6 +57,15 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
             map.addMarker(new MarkerOptions().position(new LatLng(latitude + 0.003, longitude + 0.003)).title("Hello!").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
             map.addMarker(new MarkerOptions().position(new LatLng(latitude + 0.0001, longitude + 0.001)).title("Derp").icon(BitmapDescriptorFactory.fromResource(R.drawable.chest)));
 
+            //Create a circle at a pin's location
+            CircleOptions circleOptions = new CircleOptions().center(new LatLng(latitude + 0.003, longitude + 0.003)).radius(15);
+            Circle circle = map.addCircle(circleOptions);
+            circle.setStrokeColor(Color.BLUE);
+            circle.setStrokeWidth(3);
+
+            int alpha = 60;
+            float hsv[] = { 250, (float) 0.99, (float) 0.9};
+            circle.setFillColor(HSVToColor(alpha, hsv));
 
             Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
 
