@@ -6,7 +6,6 @@ import android.location.Location;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 
 import java.util.Random;
 
@@ -61,8 +60,8 @@ public class MapSettings {
                 }
 
                 // Remove the treasure
-                treasures[i].getPin()
-                numTreasures--;
+                treasures[i].getTreasure().remove();
+                removeTreasure(i);
             }
 
 
@@ -121,7 +120,7 @@ public class MapSettings {
     }
 
     public void placeTreasure(int i) {
-        map.addMarker(treasures[i].getPin());
+        treasures[i].setTreasure(map.addMarker(treasures[i].getPin()));
 
         // Add the treasure's aura
         Circle c = map.addCircle(treasures[i].getAura());
@@ -139,7 +138,7 @@ public class MapSettings {
      */
     public void placeTreasures() {
         for (int i = 0; i < numTreasures; i++) {
-            map.addMarker(treasures[i].getPin());
+            treasures[i].setTreasure(map.addMarker(treasures[i].getPin()));
 
             // Add the treasure's aura
             Circle c = map.addCircle(treasures[i].getAura());
@@ -148,6 +147,12 @@ public class MapSettings {
 
             float hsv[] = { 45, 70, 93 };
             c.setFillColor(HSVToColor(60, hsv));
+        }
+    }
+
+    public void removeTreasure(int i) {
+        for (int j = i; j < numTreasures; j++) {
+            treasures[j] = treasures[j + 1];
         }
     }
 
