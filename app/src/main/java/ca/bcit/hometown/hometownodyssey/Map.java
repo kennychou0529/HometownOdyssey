@@ -19,6 +19,8 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
     LocationClient locationClient;
     Location currentLocation;
     GPSTracker gps;
+    private Player player;
+    private MapSettings mapSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +28,7 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
         setContentView(R.layout.activity_map);
 
         //Create GPS object
-        gps = new GPSTracker(Map.this);
+        gps = new GPSTracker(this, Map.this);
 
         //Check if GPS is up and running
         if(gps.canGetLocation()) {
@@ -38,13 +40,13 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
             map.setMyLocationEnabled(true);
 
             // Create the Player object
-            Player player = new Player("Chris");
+            player = new Player("Chris");
             player.setMap(map);
             player.setPos(new LatLng(gps.getLatitude(), gps.getLongitude()));
             player.updateMapPosition();
 
             // Create the MapSettings object
-            MapSettings mapSettings = new MapSettings(map, player);
+            mapSettings = new MapSettings(map, player);
 
             // Set the player's home
             mapSettings.setHome(player.getPos());
@@ -101,4 +103,7 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
          */
 
         }
+
+    public Player getPlayer() { return player; };
+    public MapSettings getMapSettings() { return mapSettings; };
 }

@@ -14,6 +14,8 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class GPSTracker extends Service implements LocationListener {
 
     private final Context mContext;
@@ -27,21 +29,24 @@ public class GPSTracker extends Service implements LocationListener {
     // flag for GPS status
     boolean canGetLocation = false;
 
+    private Map currentMap;
+
     Location location; // location
     double latitude; // latitude
     double longitude; // longitude
 
     // The minimum distance to change Updates in meters
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
+    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = MapSettings.MIN_TREASURE_DISTANCE;
 
     // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 10 ; // 10  milliseonds
 
     // Declaring a Location Manager
     protected LocationManager locationManager;
 
-    public GPSTracker(Context context) {
+    public GPSTracker(Context context, Map m) {
         this.mContext = context;
+        currentMap = m;
         getLocation();
     }
 
@@ -181,6 +186,24 @@ public class GPSTracker extends Service implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
+        location = locationManager
+                .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if (location != null) {
+            latitude = location.getLatitude();
+            longitude = location.getLongitude();
+            LatLng currentLocation = new LatLng(latitude, longitude);
+
+            Player player = currentMap.getPlayer();
+            MapSettings ms = currentMap.getMapSettings();
+
+            // Update the player and map position
+            player.setPos(currentLocation);
+            player.updateMapPosition();
+
+            // Check if the player has found any treasures
+            ms.getTreasure();
+
+        }
     }
 
     @Override
