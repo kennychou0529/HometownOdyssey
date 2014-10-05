@@ -2,13 +2,14 @@ package ca.bcit.hometown.hometownodyssey;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import ca.bcit.hometown.hometownodyssey.AdventureFragment.OnFragmentInteractionListener;
 
-
-public class Home extends Activity {
+public class Home extends Activity implements OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,5 +88,9 @@ public class Home extends Activity {
         startActivity(intent);
 
         return;
+    }
+
+    public void onFragmentInteraction(Uri uri) {
+        // Does nothing currently
     }
 }

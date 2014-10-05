@@ -6,6 +6,7 @@ import android.location.Location;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 
 import java.util.Random;
 
@@ -49,7 +50,19 @@ public class MapSettings {
 
             if (results[0] <= MIN_TREASURE_DISTANCE) {
                 // Claim the treasure
-                // TODO: Actually claiming treasures
+                switch(treasures[i].getType()) {
+                    case 0: // Money
+                        player.addMoney(100);
+                        break;
+                    case 1: // Item
+                        break;
+                    case 2: // Special item
+                        break;
+                }
+
+                // Remove the treasure
+                treasures[i].getPin()
+                numTreasures--;
             }
 
 

@@ -50,6 +50,16 @@ public class Player {
     }
 
     /**
+     * Adds to the player's money count
+     *
+     * @param m the money count
+     */
+    public void addMoney(int m) {
+        money += m;
+    }
+
+
+    /**
      * Sets the player's level
      *
      * @param l the level

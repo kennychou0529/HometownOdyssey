@@ -11,6 +11,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class Treasure {
     private MarkerOptions tPin;
     private CircleOptions aura;
+    /** 0 = money, 1 = item, 2 = special item */
     private int type;
 
     public Treasure(LatLng pos, int t) {
@@ -33,5 +34,9 @@ public class Treasure {
 
     public CircleOptions getAura() {
         return aura;
+    }
+
+    public int getType() {
+        return type;
     }
 }
