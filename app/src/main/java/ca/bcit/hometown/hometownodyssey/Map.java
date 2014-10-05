@@ -1,6 +1,5 @@
 package ca.bcit.hometown.hometownodyssey;
 
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -9,16 +8,9 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-
-import static android.graphics.Color.HSVToColor;
 
 
 public class Map extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks,
@@ -45,29 +37,16 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
 
             map.setMyLocationEnabled(true);
 
-            //Get current latitude and longitude
-            double latitude = gps.getLatitude();
-            double longitude = gps.getLongitude();
-            LatLng current = new LatLng(latitude, longitude);
+            // Create the Player object
+            Player player = new Player("Chris");
+            player.setMap(map);
+            player.setPos(new LatLng(gps.getLatitude(), gps.getLongitude()));
+            player.updateMapPosition();
 
-            //Move the camera to the specified location level 17
-            // (note: 2 is min zoom and 21 is max. Anything above and below
-            // Auto becomes the min or max.
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 17));
-            map.addMarker(new MarkerOptions().position(new LatLng(latitude + 0.003, longitude + 0.003)).title("Hello!").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-            map.addMarker(new MarkerOptions().position(new LatLng(latitude + 0.0001, longitude + 0.001)).title("Derp").icon(BitmapDescriptorFactory.fromResource(R.drawable.chest)));
+            // Create the MapSettings object
+            MapSettings mapSettings = new MapSettings(map);
 
-            //Create a circle at a pin's location
-            CircleOptions circleOptions = new CircleOptions().center(new LatLng(latitude + 0.003, longitude + 0.003)).radius(15);
-            Circle circle = map.addCircle(circleOptions);
-            circle.setStrokeColor(Color.BLUE);
-            circle.setStrokeWidth(3);
-
-            int alpha = 60;
-            float hsv[] = { 250, (float) 0.99, (float) 0.9};
-            circle.setFillColor(HSVToColor(alpha, hsv));
-
-            Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+            mapSettings.createTreasure(player, 1, 0);
 
         }
         else
@@ -89,8 +68,6 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
     public void onConnected(Bundle dataBundle) {
         // Display the connection status
         Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
-
-
     }
     /*
      * Called by Location Services if the connection to the
