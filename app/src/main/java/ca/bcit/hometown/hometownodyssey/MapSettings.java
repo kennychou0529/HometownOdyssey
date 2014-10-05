@@ -154,6 +154,8 @@ public class MapSettings {
         for (int j = i; j < numTreasures; j++) {
             treasures[j] = treasures[j + 1];
         }
+
+        numTreasures--;
     }
 
     public void setHome(LatLng loc) {
