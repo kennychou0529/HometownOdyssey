@@ -13,7 +13,6 @@ public class Home extends Activity implements OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
     }
