@@ -46,7 +46,12 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
             // Create the MapSettings object
             MapSettings mapSettings = new MapSettings(map);
 
-            mapSettings.createTreasure(player, 1, 0);
+            // Set the player's home
+            mapSettings.setHome(player.getPos());
+
+            mapSettings.createTreasure(2000, 0);
+            mapSettings.createTreasure(2000, 0);
+            mapSettings.createTreasure(2000, 0);
 
         }
         else
