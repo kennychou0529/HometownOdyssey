@@ -26,7 +26,7 @@ public class MapSettings {
     private Random r = new Random();
 
     /** The minimum distance in metres to claim a treasure */
-    public static final int MIN_TREASURE_DISTANCE = 10;
+    public static final int MIN_TREASURE_DISTANCE = 50;
 
     public MapSettings(GoogleMap m, Player p) {
         map = m;
@@ -60,11 +60,8 @@ public class MapSettings {
                 }
 
                 // Remove the treasure
-                treasures[i].getTreasure().remove();
                 removeTreasure(i);
             }
-
-
         }
     }
 
@@ -128,7 +125,9 @@ public class MapSettings {
         c.setStrokeWidth(3);
 
         float hsv[] = { 45, 70, 93 };
-        c.setFillColor(HSVToColor(60, hsv));
+
+
+        treasures[i].setCircle(c);
     }
 
     /**
@@ -147,10 +146,15 @@ public class MapSettings {
 
             float hsv[] = { 45, 70, 93 };
             c.setFillColor(HSVToColor(60, hsv));
+
+            treasures[i].setCircle(c);
         }
     }
 
     public void removeTreasure(int i) {
+        treasures[i].getTreasure().remove();
+        treasures[i].getCircle().remove();
+
         for (int j = i; j < numTreasures; j++) {
             treasures[j] = treasures[j + 1];
         }

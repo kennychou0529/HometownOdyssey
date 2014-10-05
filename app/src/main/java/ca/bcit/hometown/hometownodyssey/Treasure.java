@@ -1,6 +1,7 @@
 package ca.bcit.hometown.hometownodyssey;
 
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -13,6 +14,7 @@ public class Treasure {
     private MarkerOptions tPin;
     private Marker treasure;
     private CircleOptions aura;
+    private Circle aCircle;
     /** 0 = money, 1 = item, 2 = special item */
     private int type;
 
@@ -36,6 +38,14 @@ public class Treasure {
 
     public Marker getTreasure() {
         return treasure;
+    }
+
+    public void setCircle(Circle c) {
+        aCircle = c;
+    }
+
+    public Circle getCircle() {
+        return aCircle;
     }
 
     public MarkerOptions getPin() {
