@@ -44,7 +44,7 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
             player.updateMapPosition();
 
             // Create the MapSettings object
-            MapSettings mapSettings = new MapSettings(map);
+            MapSettings mapSettings = new MapSettings(map, player);
 
             // Set the player's home
             mapSettings.setHome(player.getPos());

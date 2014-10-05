@@ -1,6 +1,7 @@
 package ca.bcit.hometown.hometownodyssey;
 
 import android.graphics.Color;
+import android.location.Location;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Circle;
@@ -19,13 +20,40 @@ public class MapSettings {
     private Treasure[] treasures;
     private int numTreasures = 0;
     private LatLng home;
+    private Player player;
 
     private GoogleMap map;
     private Random r = new Random();
 
-    public MapSettings(GoogleMap m) {
+    /** The minimum distance in metres to claim a treasure */
+    public static final int MIN_TREASURE_DISTANCE = 10;
+
+    public MapSettings(GoogleMap m, Player p) {
         map = m;
+        player = p;
         treasures = new Treasure[10];
+    }
+
+    /**
+     * Checks all treasures to see if they are close enough
+     * to the player to be 'opened'.
+     */
+    public void getTreasure() {
+        float[] results = new float[1];
+        for (int i = 0; i < numTreasures; i++) {
+            Location.distanceBetween(player.getLatitude(),
+                    player.getLongitude(),
+                    treasures[i].getPin().getPosition().latitude,
+                    treasures[i].getPin().getPosition().longitude,
+                    results);
+
+            if (results[0] <= MIN_TREASURE_DISTANCE) {
+                // Claim the treasure
+                // TODO: Actually claiming treasures
+            }
+
+
+        }
     }
 
     /**
