@@ -24,9 +24,9 @@ public class Home extends Activity implements OnFragmentInteractionListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
         DatabaseHelper db = new DatabaseHelper(this);
 
-        Log.d("Insert: ", "Inserting ..");
         db.addValue("treasure1", "meep");
         db.addValue("treasure2", "meepblah");
         db.addValue("treasure3", "meepmeep");
@@ -36,12 +36,6 @@ public class Home extends Activity implements OnFragmentInteractionListener {
         // Reading all values
         Log.d("Reading: ", "Reading all values..");
         List<String> values = db.getAllValues();
-
-        for (String v: values) {
-            String log = "Id: " +  v;
-            // Writing values to lig
-            Log.d("Name: ", log);
-        }
 
         // Create the player object
         player = new Player("Chris Klassen");

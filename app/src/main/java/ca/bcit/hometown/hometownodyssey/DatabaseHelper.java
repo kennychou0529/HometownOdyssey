@@ -15,13 +15,15 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 2;
-    private static final String STORAGE_TABLE_NAME = "VALUES";
+    private static final String STORAGE_TABLE_NAME = "db";
     private static final String DATABASE_NAME = "The Vault";
     //Rows in table
     private static final String KEY_ID = "id";
-    private static final String KEY_NAME = "name";
+    private static final String KEY_NAME = "pname";
 
-    private static final String STORAGE_TABLE_CREATE= "CREATE TABLE VALUES(_id TEXT PRIMARY  KEY NOT NULL, name TEXT NOT NULL);";
+    private static final String STORAGE_TABLE_CREATE = "CREATE TABLE " + STORAGE_TABLE_NAME + "("  +
+            KEY_ID + " INTEGER PRIMARY KEY, " +
+            KEY_NAME + " TEXT NOT NULL);";
 
     //Default constructor
     public DatabaseHelper(Context context) {
@@ -36,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Method is called during an upgrade of the database,
     @Override
     public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
-        database.execSQL("DROP TABLE IF EXISTS VALUES");
+        database.execSQL("DROP TABLE IF EXISTS " + STORAGE_TABLE_NAME);
 
         // Create tables again
         onCreate(database);
@@ -46,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, ID);
+        //values.put(KEY_ID, ID);
         values.put(KEY_NAME, name);
 
         db.insert(STORAGE_TABLE_NAME, null, values);

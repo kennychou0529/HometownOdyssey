@@ -64,6 +64,8 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
                 mapSettings.createTreasure(2000, 0);
                 mapSettings.createTreasure(2000, 0);
                 mapSettings.createTreasure(2000, 0);
+            } else {
+
             }
 
         }
