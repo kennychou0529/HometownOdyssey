@@ -46,7 +46,6 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
                 player.setMap(map);
             }
 
-
             player.setPos(new LatLng(gps.getLatitude(), gps.getLongitude()));
             player.updateMapPosition();
 
@@ -55,6 +54,9 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
 
             if (mapSettings.getNumTreasures() == 0) {
                 mapSettings.setMap(map);
+
+                // Re-link the player
+                mapSettings.setPlayer(player);
 
                 // Set the player's home
                 mapSettings.setHome(player.getPos());

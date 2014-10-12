@@ -10,8 +10,8 @@ import android.view.View;
 import ca.bcit.hometown.hometownodyssey.AdventureFragment.OnFragmentInteractionListener;
 
 public class Home extends Activity implements OnFragmentInteractionListener {
-    private Player player;
-    private MapSettings map;
+    private Player player = null;
+    private MapSettings map = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

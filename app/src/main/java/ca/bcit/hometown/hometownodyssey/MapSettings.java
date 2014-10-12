@@ -34,6 +34,14 @@ public class MapSettings implements Serializable {
         treasures = new Treasure[10];
     }
 
+    public void setPlayer(Player p) {
+        player = p;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
     /**
      * Checks all treasures to see if they are close enough
      * to the player to be 'opened'.
@@ -41,6 +49,7 @@ public class MapSettings implements Serializable {
     public void getTreasure() {
         float[] results = new float[1];
         for (int i = 0; i < numTreasures; i++) {
+
             Location.distanceBetween(player.getLatitude(),
                     player.getLongitude(),
                     treasures[i].getPin().getPosition().latitude,

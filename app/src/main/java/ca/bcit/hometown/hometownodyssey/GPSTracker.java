@@ -196,12 +196,14 @@ public class GPSTracker extends Service implements LocationListener {
             Player player = currentMap.getPlayer();
             MapSettings ms = currentMap.getMapSettings();
 
-            // Update the player and map position
-            player.setPos(currentLocation);
-            // player.updateMapPosition();
+            if (player != null && ms != null) {
+                // Update the player and map position
+                player.setPos(currentLocation);
+                // player.updateMapPosition();
 
-            // Check if the player has found any treasures
-            ms.getTreasure();
+                // Check if the player has found any treasures
+                ms.getTreasure();
+            }
 
         }
     }
