@@ -4,12 +4,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.Serializable;
+
 /**
  * Created by Chris on 2014-09-25.
  *
  * The main Player class that holds all player data.
  */
-public class Player {
+public class Player implements Serializable {
     private GoogleMap map;
     private LatLng pos;
     private String name;
@@ -28,7 +30,7 @@ public class Player {
     }
 
     public void updateMapPosition() {
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, 17));
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, 13));
     }
 
     /**
@@ -115,6 +117,10 @@ public class Player {
      */
     public LatLng getPos() {
         return pos;
+    }
+
+    public GoogleMap getMap() {
+        return map;
     }
 
     /**

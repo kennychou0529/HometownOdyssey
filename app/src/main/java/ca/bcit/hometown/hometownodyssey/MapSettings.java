@@ -7,6 +7,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.Serializable;
 import java.util.Random;
 
 import static android.graphics.Color.HSVToColor;
@@ -16,7 +17,7 @@ import static android.graphics.Color.HSVToColor;
  *
  * This class handles the settings for the map screen.
  */
-public class MapSettings {
+public class MapSettings implements Serializable {
     private Treasure[] treasures;
     private int numTreasures = 0;
     private LatLng home;
@@ -28,8 +29,7 @@ public class MapSettings {
     /** The minimum distance in metres to claim a treasure */
     public static final int MIN_TREASURE_DISTANCE = 50;
 
-    public MapSettings(GoogleMap m, Player p) {
-        map = m;
+    public MapSettings(Player p) {
         player = p;
         treasures = new Treasure[10];
     }
@@ -162,11 +162,19 @@ public class MapSettings {
         numTreasures--;
     }
 
+    public void setMap(GoogleMap m) {
+        map = m;
+    }
+
     public void setHome(LatLng loc) {
         home = loc;
     }
 
     public LatLng getHome() {
         return home;
+    }
+
+    public int getNumTreasures() {
+        return numTreasures;
     }
 }

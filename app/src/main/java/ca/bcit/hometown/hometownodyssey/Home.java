@@ -10,13 +10,20 @@ import android.view.View;
 import ca.bcit.hometown.hometownodyssey.AdventureFragment.OnFragmentInteractionListener;
 
 public class Home extends Activity implements OnFragmentInteractionListener {
+    private Player player;
+    private MapSettings map;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-    }
+        // Create the player object
+        player = new Player("Chris Klassen");
 
+        // Create the map settings object
+        map = new MapSettings(player);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -44,10 +51,10 @@ public class Home extends Activity implements OnFragmentInteractionListener {
      */
     public void startActivityMap(View view) {
         Intent intent = new Intent(this, Map.class);
+        intent.putExtra("player", player);
+        intent.putExtra("mapsettings", map);
 
         startActivity(intent);
-
-        return;
     }
 
     /**
@@ -60,7 +67,6 @@ public class Home extends Activity implements OnFragmentInteractionListener {
 
         startActivity(intent);
 
-        return;
     }
 
     /**
@@ -73,7 +79,6 @@ public class Home extends Activity implements OnFragmentInteractionListener {
 
         startActivity(intent);
 
-        return;
     }
 
     /**
@@ -86,7 +91,6 @@ public class Home extends Activity implements OnFragmentInteractionListener {
 
         startActivity(intent);
 
-        return;
     }
 
     public void onFragmentInteraction(Uri uri) {

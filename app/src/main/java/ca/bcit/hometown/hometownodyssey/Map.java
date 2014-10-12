@@ -40,20 +40,29 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
             map.setMyLocationEnabled(true);
 
             // Create the Player object
-            player = new Player("Chris");
-            player.setMap(map);
+            player = (Player) getIntent().getSerializableExtra("player");
+
+            if (player.getMap() == null) {
+                player.setMap(map);
+            }
+
+
             player.setPos(new LatLng(gps.getLatitude(), gps.getLongitude()));
             player.updateMapPosition();
 
             // Create the MapSettings object
-            mapSettings = new MapSettings(map, player);
+            mapSettings = (MapSettings) getIntent().getSerializableExtra("mapsettings");
 
-            // Set the player's home
-            mapSettings.setHome(player.getPos());
+            if (mapSettings.getNumTreasures() == 0) {
+                mapSettings.setMap(map);
 
-            mapSettings.createTreasure(2000, 0);
-            mapSettings.createTreasure(2000, 0);
-            mapSettings.createTreasure(2000, 0);
+                // Set the player's home
+                mapSettings.setHome(player.getPos());
+
+                mapSettings.createTreasure(2000, 0);
+                mapSettings.createTreasure(2000, 0);
+                mapSettings.createTreasure(2000, 0);
+            }
 
         }
         else
