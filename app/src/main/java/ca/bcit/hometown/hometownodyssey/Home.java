@@ -4,19 +4,50 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import java.util.List;
+
 import ca.bcit.hometown.hometownodyssey.AdventureFragment.OnFragmentInteractionListener;
 
 public class Home extends Activity implements OnFragmentInteractionListener {
 
+    private Player player = null;
+    private MapSettings map = null;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-    }
+        DatabaseHelper db = new DatabaseHelper(this);
 
+        Log.d("Insert: ", "Inserting ..");
+        db.addValue("treasure1", "meep");
+        db.addValue("treasure2", "meepblah");
+        db.addValue("treasure3", "meepmeep");
+        db.addValue("treasure4", "meepers");
+
+
+        // Reading all values
+        Log.d("Reading: ", "Reading all values..");
+        List<String> values = db.getAllValues();
+
+        for (String v: values) {
+            String log = "Id: " +  v;
+            // Writing values to lig
+            Log.d("Name: ", log);
+        }
+
+        // Create the player object
+        player = new Player("Chris Klassen");
+        // Create the map settings object
+        map = new MapSettings(player);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
