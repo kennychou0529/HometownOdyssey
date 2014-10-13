@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +17,7 @@ import java.util.List;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "The Vault";
     private static final String PLAYER_TABLE_NAME = "Player";
     private static final String INVENTORY_TABLE_NAME = "Inventory";
@@ -44,15 +46,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_TIME = "Time";
     private static final String KEY_AVAIL = "Availability";
 
-    private static final String PLAYER_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + PLAYER_TABLE_NAME + "("  +
-            KEY_ID + " INTEGER PRIMARY KEY, " +
-            KEY_NAME + " TEXT NOT NULL, " +
-            KEY_LEVEL + " INTEGER, " +
-            KEY_MONEY + " INTEGER, " +
-            KEY_HEAD_ITEM + " INTEGER, " +
-            KEY_BODY_ITEM + " INTEGER, " +
-            KEY_LEG_ITEM + " INTEGER, " +
-            KEY_FOOT_ITEM + " INTEGER);";
+    private static final String PLAYER_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + PLAYER_TABLE_NAME + " ("  +
+            KEY_ID + " INTEGER PRIMARY KEY , " +
+            KEY_NAME + " TEXT NOT NULL , " +
+            KEY_LEVEL + " INTEGER , " +
+            KEY_MONEY + " INTEGER , " +
+            KEY_HEAD_ITEM + " INTEGER , " +
+            KEY_BODY_ITEM + " INTEGER , " +
+            KEY_LEG_ITEM + " INTEGER , " +
+            KEY_FOOT_ITEM + " INTEGER );";
 
     private static final String INVENTORY_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + INVENTORY_TABLE_NAME + "("  +
             KEY_ID + " INTEGER PRIMARY KEY, " +
@@ -81,11 +83,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d("FUCKING CHRIST", "X");
         db.execSQL(PLAYER_TABLE_CREATE);
-        db.execSQL(INVENTORY_TABLE_CREATE);
+       /* db.execSQL(INVENTORY_TABLE_CREATE);
         db.execSQL(TREASURE_TABLE_CREATE);
         db.execSQL(TRADER_TABLE_CREATE);
+        */
     }
 
     // Method is called during an upgrade of the database,
@@ -100,29 +102,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(database);
     }
 
+    /**************************************************************
+     ** PLAYER TABLE METHODS
+     ***************************************************************/
+    //Save player into the database
     public void savePlayerData(Player p) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         String pName = p.getPlayerName();
         Cursor cursor = db.rawQuery("SELECT * from " + PLAYER_TABLE_NAME, null);
-
-       //+ " WHERE " + KEY_NAME  + " = \"" + pName + "\""
-
        if (cursor.getCount() < 1)
        {
-          //TODO: ADD CORRECT VALUES FOR INVENTORY
-           ContentValues values = new ContentValues();
-           values.put(KEY_NAME, pName);
-           values.put(KEY_LEVEL, p.getLevel());
-           values.put(KEY_MONEY, 100000);
-           values.put(KEY_HEAD_ITEM, 0);
-           values.put(KEY_BODY_ITEM, 0);
-           values.put(KEY_LEG_ITEM, 0);
-           values.put(KEY_FOOT_ITEM, 0);
+            //TODO: ADD CORRECT VALUES FOR INVENTORY
+            ContentValues values = new ContentValues();
+            values.put(KEY_ID, 1);
+            values.put(KEY_NAME, pName);
+            values.put(KEY_LEVEL, p.getLevel());
+            values.put(KEY_MONEY, 100000);
+            values.put(KEY_HEAD_ITEM, 0);
+            values.put(KEY_BODY_ITEM, 0);
+            values.put(KEY_LEG_ITEM, 0);
+            values.put(KEY_FOOT_ITEM, 0);
 
-           Log.d("Adding new player: ", "Player being added.");
-           db.insert(PLAYER_TABLE_NAME, null, values);
-       }
+            Log.d("Adding new player: ", "Player being added.");
+            db.insert(PLAYER_TABLE_NAME, null, values);
+        }
 
         db.close();
     }
@@ -133,18 +137,78 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Player Name
         cursor = db.rawQuery("SELECT " + KEY_NAME + " FROM " + PLAYER_TABLE_NAME, null);
+        cursor.moveToFirst();
         p.setPlayerName(cursor.getString(0));
 
         // Player Name
         cursor = db.rawQuery("SELECT " + KEY_LEVEL + " FROM " + PLAYER_TABLE_NAME, null);
+        cursor.moveToFirst();
         p.setLevel(cursor.getInt(0));
 
         // Player Name
         cursor = db.rawQuery("SELECT " + KEY_MONEY + " FROM " + PLAYER_TABLE_NAME, null);
+        cursor.moveToFirst();
         p.setMoney(cursor.getInt(0));
 
         // TODO: Player equipment loading
     }
+
+    /**************************************************************
+     ** TREASURE TABLE METHODS
+     ***************************************************************/
+    //load treasures to num rows in table
+    //Add treasure
+    //Delete treasure
+    //get array of treasure
+
+    //Save treasure object into database
+    public void saveTreasureData(Treasure t) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+
+            //TODO: ADD CORRECT VALUES FOR INVENTORY
+            ContentValues values = new ContentValues();
+            values.put(KEY_TYPE, t.getType());
+            values.put(KEY_LAT, t.getPin().getPosition().latitude);
+            values.put(KEY_LONG, t.getPin().getPosition().longitude);
+
+            Log.d("Adding new treasure: ", "treasure being added.");
+            db.insert(TREASURE_TABLE_NAME, null, values);
+
+        db.close();
+    }
+
+    public void buildTreasureList(ArrayList<Treasure> tList) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+        int type;
+        LatLng location;
+
+        String selectQuery = "SELECT * FROM " + TREASURE_TABLE_NAME;
+        cursor = db.rawQuery(selectQuery, null);
+
+        //Iterate through all rows
+        if (cursor.moveToFirst()) {
+            do {
+                type = cursor.getInt(0);
+                location = new  LatLng(cursor.getFloat(1), cursor.getFloat(2));
+                Treasure temp = new Treasure(location, type);
+
+               tList.add(temp);
+            } while (cursor.moveToNext());
+        }
+
+
+        // TODO: Player equipment loading
+    }
+
+
+
+
+
+
+
+
 
     public String getValue(String ID) {
         SQLiteDatabase db = this.getReadableDatabase();
