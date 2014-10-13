@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NAME = "The Vault";
     private static final String PLAYER_TABLE_NAME = "Player";
     private static final String INVENTORY_TABLE_NAME = "Inventory";
@@ -131,6 +131,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    public boolean playerExists() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+
+        // Player Name
+        cursor = db.rawQuery("SELECT " + KEY_NAME + " FROM " + PLAYER_TABLE_NAME, null);
+
+        if (cursor.getCount() < 1) {
+            db.close();
+            return false;
+        } else {
+            db.close();
+            return true;
+        }
+
+    }
+
     public void buildPlayer(Player p) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor;
@@ -151,6 +168,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         p.setMoney(cursor.getInt(0));
 
         // TODO: Player equipment loading
+        db.close();
     }
 
     /**************************************************************
@@ -201,14 +219,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // TODO: Player equipment loading
     }
-
-
-
-
-
-
-
-
 
     public String getValue(String ID) {
         SQLiteDatabase db = this.getReadableDatabase();

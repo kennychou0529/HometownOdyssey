@@ -24,13 +24,15 @@ public class MapSettings implements Serializable {
     private Player player;
 
     private GoogleMap map;
+    private Map mapAct;
     private Random r = new Random();
 
     /** The minimum distance in metres to claim a treasure */
     public static final int MIN_TREASURE_DISTANCE = 50;
 
-    public MapSettings(Player p) {
+    public MapSettings(Player p, Map m) {
         player = p;
+        mapAct = m;
         treasures = new Treasure[10];
     }
 
@@ -92,6 +94,8 @@ public class MapSettings implements Serializable {
         // Create the treasure
         treasures[numTreasures] = new Treasure(pos, type);
 
+        mapAct.saveTreasure(treasures[numTreasures]);
+
         // Place the treasure
         placeTreasure(numTreasures);
         numTreasures++;
@@ -115,6 +119,20 @@ public class MapSettings implements Serializable {
 
         // Create the treasure
         treasures[numTreasures] = new Treasure(pos, type);
+
+        mapAct.saveTreasure(treasures[numTreasures]);
+
+        // Place the treasure
+        placeTreasure(numTreasures);
+        numTreasures++;
+    }
+
+    /**
+     * Adds a pre-existing treasure to the list
+     */
+    public void addTreasure(Treasure t) {
+        // Create the treasure
+        treasures[numTreasures] = t;
 
         // Place the treasure
         placeTreasure(numTreasures);

@@ -12,6 +12,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
+
 
 public class Map extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks,
                                              GooglePlayServicesClient.OnConnectionFailedListener {
@@ -21,6 +23,7 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
     GPSTracker gps;
     private Player player;
     private MapSettings mapSettings;
+    DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +42,11 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
 
             map.setMyLocationEnabled(true);
 
+            // Create a new database helper
+            db = new DatabaseHelper(this);
+
             // Create the Player object
-            player = (Player) getIntent().getSerializableExtra("player");
+            db.buildPlayer(player);
 
             if (player.getMap() == null) {
                 player.setMap(map);
@@ -50,24 +56,26 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
             player.updateMapPosition();
 
             // Create the MapSettings object
-            mapSettings = (MapSettings) getIntent().getSerializableExtra("mapsettings");
+            mapSettings = new MapSettings(player, this);
 
-            if (mapSettings.getNumTreasures() == 0) {
-                mapSettings.setMap(map);
+            // Set the player's home
+            mapSettings.setHome(player.getPos());
 
-                // Re-link the player
-                mapSettings.setPlayer(player);
+            // Retrieve all existing treasures
+            ArrayList<Treasure> tList = new ArrayList<Treasure>();
+            db.buildTreasureList(tList);
 
-                // Set the player's home
-                mapSettings.setHome(player.getPos());
-
-                mapSettings.createTreasure(2000, 0);
-                mapSettings.createTreasure(2000, 0);
-                mapSettings.createTreasure(2000, 0);
+            if (tList.size() > 0) {
+                // Add the existing treasures to the MapSettings object
+                for (Treasure t: tList) {
+                    mapSettings.addTreasure(t);
+                }
             } else {
-
+                // TODO: Add real treasure generation
+                mapSettings.createTreasure(2000, 0);
+                mapSettings.createTreasure(2000, 0);
+                mapSettings.createTreasure(2000, 0);
             }
-
         }
         else
         {
@@ -119,4 +127,8 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
 
     public Player getPlayer() { return player; };
     public MapSettings getMapSettings() { return mapSettings; };
+
+    public void saveTreasure(Treasure t) {
+        db.saveTreasureData(t);
+    }
 }

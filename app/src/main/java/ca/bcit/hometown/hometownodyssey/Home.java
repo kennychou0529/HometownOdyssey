@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +13,6 @@ import ca.bcit.hometown.hometownodyssey.AdventureFragment.OnFragmentInteractionL
 public class Home extends Activity implements OnFragmentInteractionListener {
 
     private Player player = null;
-    private MapSettings map = null;
 
 
     @Override
@@ -22,20 +20,16 @@ public class Home extends Activity implements OnFragmentInteractionListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // Create the player object
-        player = new Player("Chris Klassen");
-        // Create the map settings object
-        map = new MapSettings(player);
-
         DatabaseHelper db = new DatabaseHelper(this);
 
-        db.savePlayerData(player);
-
-        Player newPlayer = new Player("SEXY BABE");
-        db.buildPlayer(newPlayer);
-
-        Log.d("Player name BITCH", newPlayer.getPlayerName());
-
+        // Create the player object
+        if (db.playerExists()) {
+            db.buildPlayer(player);
+            db.savePlayerData(player);
+        } else {
+            player = new Player("Chris Klassen");
+            db.savePlayerData(player);
+        }
     }
 
     @Override
