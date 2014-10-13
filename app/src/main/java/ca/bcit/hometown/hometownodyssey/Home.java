@@ -24,23 +24,23 @@ public class Home extends Activity implements OnFragmentInteractionListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // Create the player object
+        player = new Player("Chris Klassen");
+        // Create the map settings object
+        map = new MapSettings(player);
 
         DatabaseHelper db = new DatabaseHelper(this);
 
-        db.addValue("treasure1", "meep");
-        db.addValue("treasure2", "meepblah");
-        db.addValue("treasure3", "meepmeep");
-        db.addValue("treasure4", "meepers");
+        db.savePlayerData(player);
+        //db.addValue("treasure2", "meepblah");
+        //db.addValue("treasure3", "meepmeep");
+        //db.addValue("treasure4", "meepers");
 
 
         // Reading all values
         Log.d("Reading: ", "Reading all values..");
         List<String> values = db.getAllValues();
 
-        // Create the player object
-        player = new Player("Chris Klassen");
-        // Create the map settings object
-        map = new MapSettings(player);
     }
 
     @Override
