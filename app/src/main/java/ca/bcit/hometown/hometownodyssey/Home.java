@@ -12,7 +12,7 @@ import ca.bcit.hometown.hometownodyssey.AdventureFragment.OnFragmentInteractionL
 
 public class Home extends Activity implements OnFragmentInteractionListener {
 
-    private Player player = null;
+    private Player player = new Player("TEMP");
 
 
     @Override
@@ -20,14 +20,14 @@ public class Home extends Activity implements OnFragmentInteractionListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        DatabaseHelper db = new DatabaseHelper(this);
+        DatabaseHelper db = DatabaseHelper.getInstance(this);
 
         // Create the player object
         if (db.playerExists()) {
             db.buildPlayer(player);
             db.savePlayerData(player);
         } else {
-            player = new Player("Chris Klassen");
+            player.setPlayerName("CHRISTOFER");
             db.savePlayerData(player);
         }
     }

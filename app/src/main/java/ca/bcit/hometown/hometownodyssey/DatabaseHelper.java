@@ -17,7 +17,10 @@ import java.util.List;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 4;
+    private static DatabaseHelper sInstance;
+
+    private int idCounter = 0;
+    private static final int DATABASE_VERSION = 6;
     private static final String DATABASE_NAME = "The Vault";
     private static final String PLAYER_TABLE_NAME = "Player";
     private static final String INVENTORY_TABLE_NAME = "Inventory";
@@ -66,9 +69,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TREASURE_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + TREASURE_TABLE_NAME + "("  +
             KEY_ID + " INTEGER PRIMARY KEY, " +
-            KEY_TYPE + "INTEGER NOT NULL ," +
-            KEY_LONG + "FLOAT  NOT NULL, " +
-            KEY_LAT + "FLOAT );";
+            KEY_TYPE + " INTEGER NOT NULL , " +
+            KEY_LONG + " FLOAT  NOT NULL, " +
+            KEY_LAT + " FLOAT );";
 
     private static final String TRADER_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + TRADER_TABLE_NAME + "("  +
             KEY_ID + " INTEGER PRIMARY KEY, " +
@@ -84,10 +87,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(PLAYER_TABLE_CREATE);
-       /* db.execSQL(INVENTORY_TABLE_CREATE);
+        db.execSQL(INVENTORY_TABLE_CREATE);
         db.execSQL(TREASURE_TABLE_CREATE);
         db.execSQL(TRADER_TABLE_CREATE);
-        */
     }
 
     // Method is called during an upgrade of the database,
@@ -154,18 +156,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Player Name
         cursor = db.rawQuery("SELECT " + KEY_NAME + " FROM " + PLAYER_TABLE_NAME, null);
-        cursor.moveToFirst();
-        p.setPlayerName(cursor.getString(0));
+        if (cursor.getColumnCount() > 0 ) {
+            cursor.moveToFirst();
+            p.setPlayerName(cursor.getString(0));
+        }
 
         // Player Name
         cursor = db.rawQuery("SELECT " + KEY_LEVEL + " FROM " + PLAYER_TABLE_NAME, null);
-        cursor.moveToFirst();
-        p.setLevel(cursor.getInt(0));
+        if (cursor.getCount() > 0 ) {
+            cursor.moveToFirst();
+            p.setLevel(cursor.getInt(0));
+        }
 
         // Player Name
         cursor = db.rawQuery("SELECT " + KEY_MONEY + " FROM " + PLAYER_TABLE_NAME, null);
-        cursor.moveToFirst();
-        p.setMoney(cursor.getInt(0));
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            p.setMoney(cursor.getInt(0));
+        }
 
         // TODO: Player equipment loading
         db.close();
@@ -186,13 +194,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             //TODO: ADD CORRECT VALUES FOR INVENTORY
             ContentValues values = new ContentValues();
+            values.put(KEY_ID, idCounter);
             values.put(KEY_TYPE, t.getType());
             values.put(KEY_LAT, t.getPin().getPosition().latitude);
             values.put(KEY_LONG, t.getPin().getPosition().longitude);
 
+             Log.d("LAT: ","" + t.getPin().getPosition().latitude );
+             Log.d("LONG: ","" + t.getPin().getPosition().latitude );
+
             Log.d("Adding new treasure: ", "treasure being added.");
             db.insert(TREASURE_TABLE_NAME, null, values);
-
+            idCounter++;
         db.close();
     }
 
@@ -208,9 +220,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //Iterate through all rows
         if (cursor.moveToFirst()) {
             do {
-                type = cursor.getInt(0);
-                location = new  LatLng(cursor.getFloat(1), cursor.getFloat(2));
+                type = cursor.getInt(1);
+                Log.d("latitude hurrrrmmmbmbm:" , " " + cursor.getFloat(2));
+                location = new  LatLng(cursor.getFloat(2), cursor.getFloat (3));
                 Treasure temp = new Treasure(location, type);
+
+                Log.d("LAT RECREATED: ","" + temp.getPin().getPosition().latitude );
+                Log.d("LONG RECREATED: ","" + temp.getPin().getPosition().latitude );
 
                tList.add(temp);
             } while (cursor.moveToNext());
@@ -265,6 +281,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.delete(PLAYER_TABLE_NAME, KEY_ID + " = ?",
                 new String[]{String.valueOf(ID)});
         db.close();
+    }
+
+    public static DatabaseHelper getInstance(Context context) {
+
+        // Use the application context, which will ensure that you
+        // don't accidentally leak an Activity's context.
+        // See this article for more information: http://bit.ly/6LRzfx
+        if (sInstance == null) {
+            sInstance = new DatabaseHelper(context.getApplicationContext());
+        }
+        return sInstance;
     }
 
 }

@@ -2,6 +2,7 @@ package ca.bcit.hometown.hometownodyssey;
 
 import android.graphics.Color;
 import android.location.Location;
+import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Circle;
@@ -131,12 +132,19 @@ public class MapSettings implements Serializable {
      * Adds a pre-existing treasure to the list
      */
     public void addTreasure(Treasure t) {
-        // Create the treasure
-        treasures[numTreasures] = t;
 
-        // Place the treasure
-        placeTreasure(numTreasures);
-        numTreasures++;
+        if (t != null) {
+            // Create the treasure
+            treasures[numTreasures] = t;
+
+            // Place the treasure
+            placeTreasure(numTreasures);
+            numTreasures++;
+        }
+        else
+        {
+            Log.d("Null treasure", ":(");
+        }
     }
 
     private double metreToDegree(int m) {
@@ -192,6 +200,11 @@ public class MapSettings implements Serializable {
     public void setMap(GoogleMap m) {
         map = m;
     }
+
+    public GoogleMap getMap() {
+        return map;
+    }
+
 
     public void setHome(LatLng loc) {
         home = loc;

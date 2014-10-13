@@ -21,7 +21,7 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
     LocationClient locationClient;
     Location currentLocation;
     GPSTracker gps;
-    private Player player;
+    private Player player = new Player("TEMP");
     private MapSettings mapSettings;
     DatabaseHelper db;
 
@@ -43,7 +43,7 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
             map.setMyLocationEnabled(true);
 
             // Create a new database helper
-            db = new DatabaseHelper(this);
+            db = DatabaseHelper.getInstance(this);
 
             // Create the Player object
             db.buildPlayer(player);
@@ -57,6 +57,10 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
 
             // Create the MapSettings object
             mapSettings = new MapSettings(player, this);
+            if (mapSettings.getMap() == null) {
+                mapSettings.setMap(map);
+            }
+
 
             // Set the player's home
             mapSettings.setHome(player.getPos());
