@@ -81,6 +81,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d("FUCKING CHRIST", "X");
         db.execSQL(PLAYER_TABLE_CREATE);
         db.execSQL(INVENTORY_TABLE_CREATE);
         db.execSQL(TREASURE_TABLE_CREATE);
@@ -124,6 +125,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
        }
 
         db.close();
+    }
+
+    public void buildPlayer(Player p) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+
+        // Player Name
+        cursor = db.rawQuery("SELECT " + KEY_NAME + " FROM " + PLAYER_TABLE_NAME, null);
+        p.setPlayerName(cursor.getString(0));
+
+        // Player Name
+        cursor = db.rawQuery("SELECT " + KEY_LEVEL + " FROM " + PLAYER_TABLE_NAME, null);
+        p.setLevel(cursor.getInt(0));
+
+        // Player Name
+        cursor = db.rawQuery("SELECT " + KEY_MONEY + " FROM " + PLAYER_TABLE_NAME, null);
+        p.setMoney(cursor.getInt(0));
+
+        // TODO: Player equipment loading
     }
 
     public String getValue(String ID) {

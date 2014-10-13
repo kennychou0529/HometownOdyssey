@@ -9,8 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import java.util.List;
-
 import ca.bcit.hometown.hometownodyssey.AdventureFragment.OnFragmentInteractionListener;
 
 public class Home extends Activity implements OnFragmentInteractionListener {
@@ -32,14 +30,11 @@ public class Home extends Activity implements OnFragmentInteractionListener {
         DatabaseHelper db = new DatabaseHelper(this);
 
         db.savePlayerData(player);
-        //db.addValue("treasure2", "meepblah");
-        //db.addValue("treasure3", "meepmeep");
-        //db.addValue("treasure4", "meepers");
 
+        Player newPlayer = new Player("SEXY BABE");
+        db.buildPlayer(newPlayer);
 
-        // Reading all values
-        Log.d("Reading: ", "Reading all values..");
-        List<String> values = db.getAllValues();
+        Log.d("Player name BITCH", newPlayer.getPlayerName());
 
     }
 
