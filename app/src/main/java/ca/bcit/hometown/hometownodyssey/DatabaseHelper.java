@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static DatabaseHelper sInstance;
 
     private int idCounter = 0;
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 10;
     private static final String DATABASE_NAME = "The Vault";
     private static final String PLAYER_TABLE_NAME = "Player";
     private static final String INVENTORY_TABLE_NAME = "Inventory";
@@ -70,13 +70,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TREASURE_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + TREASURE_TABLE_NAME + "("  +
             KEY_ID + " INTEGER PRIMARY KEY, " +
             KEY_TYPE + " INTEGER NOT NULL , " +
-            KEY_LONG + " FLOAT  NOT NULL, " +
-            KEY_LAT + " FLOAT );";
+            KEY_LONG + " REAL  NOT NULL, " +
+            KEY_LAT + " REAL NOT NULL );";
 
     private static final String TRADER_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + TRADER_TABLE_NAME + "("  +
             KEY_ID + " INTEGER PRIMARY KEY, " +
-            KEY_LAT + "FLOAT  NOT NULL, " +
-            KEY_AVAIL + "INTEGER  NOT NULL, " +
+            KEY_LAT + " DOUBLE  NOT NULL, " +
+            KEY_AVAIL + " INTEGER  NOT NULL, " +
             KEY_TIME + "FLOAT );";
 
     //Default constructor
@@ -200,7 +200,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(KEY_LONG, t.getPin().getPosition().longitude);
 
              Log.d("LAT: ","" + t.getPin().getPosition().latitude );
-             Log.d("LONG: ","" + t.getPin().getPosition().latitude );
+             Log.d("LONG: ","" + t.getPin().getPosition().longitude);
 
             Log.d("Adding new treasure: ", "treasure being added.");
             db.insert(TREASURE_TABLE_NAME, null, values);
@@ -221,12 +221,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 type = cursor.getInt(1);
-                Log.d("latitude hurrrrmmmbmbm:" , " " + cursor.getFloat(2));
-                location = new  LatLng(cursor.getFloat(2), cursor.getFloat (3));
+                Log.d("longitude pulled:" , " " + cursor.getDouble(2));
+                Log.d("latitude pulled:" , " " + cursor.getDouble(3));
+
+                location = new  LatLng(cursor.getDouble(3), cursor.getDouble (2));
                 Treasure temp = new Treasure(location, type);
 
                 Log.d("LAT RECREATED: ","" + temp.getPin().getPosition().latitude );
-                Log.d("LONG RECREATED: ","" + temp.getPin().getPosition().latitude );
+                Log.d("LONG RECREATED: ","" + temp.getPin().getPosition().longitude );
 
                tList.add(temp);
             } while (cursor.moveToNext());
