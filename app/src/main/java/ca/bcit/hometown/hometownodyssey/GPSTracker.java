@@ -204,7 +204,6 @@ public class GPSTracker extends Service implements LocationListener {
                 // Check if the player has found any treasures
                 ms.getTreasure();
             }
-
         }
     }
 

@@ -190,6 +190,10 @@ public class MapSettings implements Serializable {
         treasures[i].getTreasure().remove();
         treasures[i].getCircle().remove();
 
+        // Delete the treasure
+        DatabaseHelper db = DatabaseHelper.getInstance(mapAct);
+        db.deleteTreasure(treasures[i]);
+
         for (int j = i; j < numTreasures; j++) {
             treasures[j] = treasures[j + 1];
         }

@@ -199,9 +199,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(KEY_LAT, t.getPin().getPosition().latitude);
             values.put(KEY_LONG, t.getPin().getPosition().longitude);
 
-             Log.d("LAT: ","" + t.getPin().getPosition().latitude );
-             Log.d("LONG: ","" + t.getPin().getPosition().longitude);
-
             Log.d("Adding new treasure: ", "treasure being added.");
             db.insert(TREASURE_TABLE_NAME, null, values);
             idCounter++;
@@ -221,22 +218,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 type = cursor.getInt(1);
-                Log.d("longitude pulled:" , " " + cursor.getDouble(2));
-                Log.d("latitude pulled:" , " " + cursor.getDouble(3));
 
                 location = new  LatLng(cursor.getDouble(3), cursor.getDouble (2));
                 Treasure temp = new Treasure(location, type);
 
-                Log.d("LAT RECREATED: ","" + temp.getPin().getPosition().latitude );
-                Log.d("LONG RECREATED: ","" + temp.getPin().getPosition().longitude );
-
                tList.add(temp);
             } while (cursor.moveToNext());
         }
-
-
-        // TODO: Player equipment loading
     }
+
+    public void deleteTreasure(Treasure t) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        double lat = t.getPin().getPosition().latitude;
+        double lon = t.getPin().getPosition().longitude;
+
+        db.delete(TREASURE_TABLE_NAME, KEY_LAT + "=" + lat + "AND" +
+                KEY_LONG + "=" + lon, null);
+
+        db.close();
+    }
+
+    public void deleteAllTreasures() {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(TREASURE_TABLE_NAME, null, null);
+
+        db.close();
+    }
+
 
     public String getValue(String ID) {
         SQLiteDatabase db = this.getReadableDatabase();

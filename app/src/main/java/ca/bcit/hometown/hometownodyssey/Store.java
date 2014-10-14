@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 
 public class Store extends Activity {
 
@@ -26,9 +28,15 @@ public class Store extends Activity {
             "Text #27", "Text #28",   "Text #29",
             "Text #30", "Text #31","Blah #32" };
 
-    /* private static Item[] shopItems;
-    each item needs to have an image & name
-    */
+    private ArrayList<Item> headItems;
+    private ArrayList<Item> bodyItems;
+    private ArrayList<Item> legItems;
+    private ArrayList<Item> footItems;
+
+    private int numHeadItems = 0;
+    private int numBodyItems = 0;
+    private int numLegtems = 0;
+    private int numFootItems = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,5 +81,22 @@ public class Store extends Activity {
             return v;
         }
 
+        public void initializeShopItems() {
+            // Head Items
+            headItems.add(numHeadItems++, new Item("Mario Hat", "This is a hat from Mario", 0, 100,
+                    getResources().getIdentifier("testhat.png", "drawable", getPackageName())));
+            headItems.add(numHeadItems++, new Item("Luigi Hat", "Just kidding still Mario", 0, 900,
+                    getResources().getIdentifier("testhat.png", "drawable", getPackageName())));
+            headItems.add(numHeadItems++, new Item("Second Mario Hat", "This is also a hat from Mario", 0, 200,
+                    getResources().getIdentifier("testhat.png", "drawable", getPackageName())));
+
+            // Body Items
+            bodyItems.add(numBodyItems++, new Item("Mario Overalls", "Mario wears a hat for pants", 0, 300,
+                    getResources().getIdentifier("testhat.png", "drawable", getPackageName())));
+
+            // Leg Items
+
+            // Foot Items
+        }
     };
 }
