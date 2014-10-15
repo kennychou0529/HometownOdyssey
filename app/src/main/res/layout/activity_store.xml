@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.30"
-        android:id="@+id/listView"
+        android:id="@+id/headListView"
         android:background="#D2DF69"
         android:orientation="horizontal"
         />
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.25"
-        android:id="@+id/listView4"
+        android:id="@+id/bodyListView"
         android:background="#D2DF69"
         android:orientation="horizontal"
         />
@@ -55,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.25"
-        android:id="@+id/listView2"
+        android:id="@+id/legListView"
         android:background="#D2DF69"
         android:orientation="horizontal"
         />
@@ -71,7 +71,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.25"
-        android:id="@+id/listView3"
+        android:id="@+id/footListView"
         android:background="#D2DF69"
         android:orientation="horizontal"
         />
