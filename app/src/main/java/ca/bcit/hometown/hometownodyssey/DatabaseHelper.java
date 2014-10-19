@@ -40,6 +40,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Inventory table rows
     private static final String KEY_TYPE = "type";
     private static final String KEY_VALUE = "value";
+    private static final String KEY_TEXT = "text";
+    private static final String KEY_IMAGE = "image";
 
     //Treasure rows
     private static final String KEY_LAT = "latitude";
@@ -63,8 +65,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             KEY_ID + " INTEGER PRIMARY KEY, " +
             KEY_TYPE + "INTEGER NOT NULL, " +
             KEY_NAME + " TEXT NOT NULL, " +
-            KEY_VALUE + "INTEGER, " +
-            KEY_LEG_ITEM + "TEXT );";
+            KEY_TEXT + " TEXT NOT NULL, " +
+            KEY_IMAGE + " INTEGER NOT NULL, " +
+            KEY_VALUE + "INTEGER );";
 
 
     private static final String TREASURE_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + TREASURE_TABLE_NAME + "("  +
@@ -247,6 +250,73 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**************************************************************
+     ** INVENTORY TABLE METHODS
+     ***************************************************************/
+    // save item
+    // get all items
+    // delete item
+    // delete all items
+
+    //Save item object into database
+    public void saveItemData(Item i) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        i.setId(idCounter);
+
+        //TODO: ADD CORRECT VALUES FOR INVENTORY
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID, idCounter);
+        values.put(KEY_TYPE, i.getType());
+        values.put(KEY_NAME, i.getName());
+        values.put(KEY_VALUE, i.getValue());
+
+        Log.d("Adding new item: ", "item being added.");
+        db.insert(INVENTORY_TABLE_NAME, null, values);
+        idCounter++;
+
+        db.close();
+    }
+
+    public void buildInventory(ArrayList<Item> iList) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+
+        String selectQuery = "SELECT * FROM " + INVENTORY_TABLE_NAME;
+        cursor = db.rawQuery(selectQuery, null);
+
+        //Iterate through all rows
+        if (cursor.moveToFirst()) {
+            do {
+                Item temp = new Item(cursor.getString(2), cursor.getString(3), cursor.getInt(1),
+                        cursor.getInt(5), cursor.getInt(4));
+                temp.setId(cursor.getInt(0));
+
+                iList.add(temp);
+            } while (cursor.moveToNext());
+        }
+    }
+
+    public void deleteItem(Item i) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(INVENTORY_TABLE_NAME, KEY_ID + "=" + i.getId(), null);
+
+        db.close();
+    }
+
+    public void deleteInventory() {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        db.delete(INVENTORY_TABLE_NAME, null, null);
+
+        db.close();
+    }
+
+
+    /**************************************************************
+     ** BASIC METHODS
+     ***************************************************************/
 
     public String getValue(String ID) {
         SQLiteDatabase db = this.getReadableDatabase();

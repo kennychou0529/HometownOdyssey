@@ -4,6 +4,7 @@ package ca.bcit.hometown.hometownodyssey;
  * Created by Chris on 2014-10-14.
  */
 public class Item {
+    private int id;
     private int type;
     private String name;
     private String text;
@@ -16,6 +17,14 @@ public class Item {
         value = v;
         type = ty;
         imageID = img;
+    }
+
+    public void setId(int i) {
+        id = i;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public int getType() {
