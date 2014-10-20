@@ -23,10 +23,14 @@
     <ca.bcit.hometown.hometownodyssey.HorizontalListView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.30"
+        android:layout_weight="0.25"
         android:id="@+id/headListView"
         android:background="#D2DF69"
         android:orientation="horizontal"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
         />
 
     <TextView
@@ -43,6 +47,10 @@
         android:id="@+id/bodyListView"
         android:background="#D2DF69"
         android:orientation="horizontal"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
         />
     <TextView
         android:layout_width="wrap_content"
@@ -58,6 +66,10 @@
         android:id="@+id/legListView"
         android:background="#D2DF69"
         android:orientation="horizontal"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
         />
 
     <TextView
@@ -74,6 +86,10 @@
         android:id="@+id/footListView"
         android:background="#D2DF69"
         android:orientation="horizontal"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
         />
 
 </LinearLayout>

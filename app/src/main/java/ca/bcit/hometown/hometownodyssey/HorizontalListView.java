@@ -31,7 +31,6 @@ import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
@@ -236,7 +235,6 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
             View child = mAdapter.getView(mLeftViewIndex, mRemovedViewQueue.poll(), this);
             addAndMeasureChild(child, 0);
             leftEdge -= child.getMeasuredWidth();
-            Log.d("left index: ", "" + mLeftViewIndex);
             mLeftViewIndex--;
             mDisplayOffset -= child.getMeasuredWidth();
         }
@@ -270,6 +268,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
                 View child = getChildAt(i);
                 int childWidth = child.getMeasuredWidth();
                 child.layout(left, 0, left + childWidth, child.getMeasuredHeight());
+                //add white space between items
                 left += childWidth;
             }
         }

@@ -170,7 +170,6 @@ public class Store extends Activity {
 
             int itemImage = footItems.get(position).getImage();
             shopItemImage.setBackgroundResource(itemImage);
-
             return v;
         }
     };
@@ -180,23 +179,30 @@ public class Store extends Activity {
     public void initializeShopItems() {
         // Head Items
         headItems.add(numHeadItems++, new Item("Mario Hat", "This is a hat from Mario", 0, 100,
-                getApplicationContext().getResources().getIdentifier("testhat", "drawable", getPackageName())));
+                getApplicationContext().getResources().getIdentifier("test_hat", "drawable", getPackageName())));
+
         headItems.add(numHeadItems++, new Item("Luigi Hat", "Just kidding still Mario", 0, 900,
-                getApplicationContext().getResources().getIdentifier("testhat", "drawable", getPackageName())));
+                getApplicationContext().getResources().getIdentifier("test_hat", "drawable", getPackageName())));
+
         headItems.add(numHeadItems++, new Item("Second Mario Hat", "This is also a hat from Mario", 0, 200,
-                getApplicationContext().getResources().getIdentifier("testhat", "drawable", getPackageName())));
-        headItems.add(numHeadItems++, new Item("Second Mario Hat", "This is also a hat from Mario", 0, 200,
-                getApplicationContext().getResources().getIdentifier("testhat", "drawable", getPackageName())));
+                getApplicationContext().getResources().getIdentifier("test_hat", "drawable", getPackageName())));
+
+        headItems.add(numHeadItems++, new Item("Third Mario Hat", "This is also a hat from Mario", 0, 200,
+                getApplicationContext().getResources().getIdentifier("test_hat", "drawable", getPackageName())));
 
         // Body Items
-        bodyItems.add(numBodyItems++, new Item("Mario Overalls", "Mario wears a hat for pants", 0, 300,
-                getApplicationContext().getResources().getIdentifier("testhat", "drawable", getPackageName())));
+        bodyItems.add(numBodyItems++, new Item("Test Shirt", "This short doe..", 0, 300,
+                getApplicationContext().getResources().getIdentifier("test_shirt", "drawable", getPackageName())));
 
 
         // Leg Items
+        legItems.add(numLegItems++, new Item("Test Pants", "I swear this isnt copyright infrigment.", 0, 300,
+                getApplicationContext().getResources().getIdentifier("test_pants", "drawable", getPackageName())));
 
 
 
         // Foot Items
+        footItems.add(numFootItems++, new Item("Test Shoe", "hmmm", 0, 300,
+                getApplicationContext().getResources().getIdentifier("test_shoe", "drawable", getPackageName())));
     }
 }

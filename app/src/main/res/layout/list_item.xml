@@ -4,15 +4,19 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingLeft="16dp"
-    android:paddingRight="20dp"
+    android:paddingRight="16dp"
     android:paddingTop="16dp"
-    android:paddingBottom="10dp"
+    android:paddingBottom="16dp"
+    android:weightSum="1"
+    android:background="@android:color/holo_blue_bright"
     >
 
     <ImageView
         android:id="@+id/shopItemImage"
-        android:layout_width="150dip"
-        android:layout_height="150dip"
+        android:layout_width="120dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.70"
         android:scaleType="centerCrop"
         android:layout_marginBottom="0dp"
         />
@@ -20,9 +24,16 @@
     <TextView
         android:id="@+id/shopItemName"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:textColor="#000"
         android:gravity="center_horizontal"
+        android:layout_weight="0.20"
+        />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
         />
 
 </LinearLayout>

@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static DatabaseHelper sInstance;
 
     private int idCounter = 0;
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "The Vault";
     private static final String PLAYER_TABLE_NAME = "Player";
     private static final String INVENTORY_TABLE_NAME = "Inventory";
@@ -36,6 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_FOOT_ITEM = "footItem";
     private static final String KEY_LEVEL = "level";
     private static final String KEY_NAME = "name";
+    private static final String KEY_DATE = "currentDate";
 
     //Inventory table rows
     private static final String KEY_TYPE = "type";
@@ -56,6 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             KEY_NAME + " TEXT NOT NULL , " +
             KEY_LEVEL + " INTEGER , " +
             KEY_MONEY + " INTEGER , " +
+            KEY_DATE + " INTEGER , " +
             KEY_HEAD_ITEM + " INTEGER , " +
             KEY_BODY_ITEM + " INTEGER , " +
             KEY_LEG_ITEM + " INTEGER , " +
@@ -74,7 +76,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             KEY_ID + " INTEGER PRIMARY KEY, " +
             KEY_TYPE + " INTEGER NOT NULL , " +
             KEY_LONG + " REAL  NOT NULL, " +
-            KEY_LAT + " REAL NOT NULL );";
+            KEY_LAT + " REAL NOT NULL, " +
+            KEY_DATE + " INTEGER );";
 
     private static final String TRADER_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + TRADER_TABLE_NAME + "("  +
             KEY_ID + " INTEGER PRIMARY KEY, " +
@@ -114,24 +117,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void savePlayerData(Player p) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        String pName = p.getPlayerName();
         Cursor cursor = db.rawQuery("SELECT * from " + PLAYER_TABLE_NAME, null);
+        //TODO: ADD CORRECT VALUES FOR INVENTORY
+        ContentValues values = new ContentValues();
+        values.put(KEY_ID, 1);
+        values.put(KEY_NAME,  p.getPlayerName());
+        values.put(KEY_LEVEL, p.getLevel());
+        values.put(KEY_MONEY, 100000);
+        values.put(KEY_HEAD_ITEM, 0);
+        values.put(KEY_BODY_ITEM, 0);
+        values.put(KEY_LEG_ITEM, 0);
+        values.put(KEY_FOOT_ITEM, 0);
+        values.put(KEY_DATE, p.getDate());
+
        if (cursor.getCount() < 1)
        {
-            //TODO: ADD CORRECT VALUES FOR INVENTORY
-            ContentValues values = new ContentValues();
-            values.put(KEY_ID, 1);
-            values.put(KEY_NAME, pName);
-            values.put(KEY_LEVEL, p.getLevel());
-            values.put(KEY_MONEY, 100000);
-            values.put(KEY_HEAD_ITEM, 0);
-            values.put(KEY_BODY_ITEM, 0);
-            values.put(KEY_LEG_ITEM, 0);
-            values.put(KEY_FOOT_ITEM, 0);
 
-            Log.d("Adding new player: ", "Player being added.");
             db.insert(PLAYER_TABLE_NAME, null, values);
         }
+        else
+       {
+           db.update(PLAYER_TABLE_NAME, values, "id = 1", null );
+       }
 
         db.close();
     }
@@ -164,18 +171,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             p.setPlayerName(cursor.getString(0));
         }
 
-        // Player Name
+        // Player Level
         cursor = db.rawQuery("SELECT " + KEY_LEVEL + " FROM " + PLAYER_TABLE_NAME, null);
         if (cursor.getCount() > 0 ) {
             cursor.moveToFirst();
             p.setLevel(cursor.getInt(0));
         }
 
-        // Player Name
+        // Player Money
         cursor = db.rawQuery("SELECT " + KEY_MONEY + " FROM " + PLAYER_TABLE_NAME, null);
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             p.setMoney(cursor.getInt(0));
+        }
+
+        // Player Date
+        cursor = db.rawQuery("SELECT " + KEY_DATE+ " FROM " + PLAYER_TABLE_NAME, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            p.setDate(cursor.getInt(0));
         }
 
         // TODO: Player equipment loading
@@ -201,6 +215,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             values.put(KEY_TYPE, t.getType());
             values.put(KEY_LAT, t.getPin().getPosition().latitude);
             values.put(KEY_LONG, t.getPin().getPosition().longitude);
+            values.put(KEY_TYPE, t.getDate());
 
             Log.d("Adding new treasure: ", "treasure being added.");
             db.insert(TREASURE_TABLE_NAME, null, values);
@@ -224,6 +239,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 location = new  LatLng(cursor.getDouble(3), cursor.getDouble (2));
                 Treasure temp = new Treasure(location, type);
+                temp.setDate(cursor.getInt(4));
 
                tList.add(temp);
             } while (cursor.moveToNext());
