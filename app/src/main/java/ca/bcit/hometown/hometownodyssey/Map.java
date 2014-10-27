@@ -3,6 +3,7 @@ package ca.bcit.hometown.hometownodyssey;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -13,6 +14,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class Map extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks,
@@ -29,6 +31,9 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        Calendar c = Calendar.getInstance();
+        int date = c.get(Calendar.DATE);
 
         //Create GPS object
         gps = new GPSTracker(this, Map.this);
@@ -65,21 +70,36 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
             // Set the player's home
             mapSettings.setHome(player.getPos());
 
-            // Retrieve all existing treasures
-            ArrayList<Treasure> tList = new ArrayList<Treasure>();
-            db.buildTreasureList(tList);
+            Log.d("Player date: " ,  "" + player.getDate());
+            Log.d("date: " ,  "" + date);
 
-            if (tList.size() > 0) {
-                // Add the existing treasures to the MapSettings object
-                for (Treasure t: tList) {
-                    mapSettings.addTreasure(t);
-                }
-            } else {
-                // TODO: Add real treasure generation
-                mapSettings.createTreasure(2000, 0);
-                mapSettings.createTreasure(2000, 0);
-                mapSettings.createTreasure(2000, 0);
-            }
+             if (player.getDate() != date)
+             {
+                 db.deleteAllTreasures();
+                 player.setDate(date);
+                 Log.d("Player date: " ,  "" + player.getDate());
+                 db.savePlayerData(player);
+
+                 mapSettings.createTreasure(2000, 0);
+                 mapSettings.createTreasure(2000, 0);
+                 mapSettings.createTreasure(2000, 0);
+             }
+            else
+             {
+                 // Retrieve all existing treasures
+                 ArrayList<Treasure> tList = new ArrayList<Treasure>();
+                 db.buildTreasureList(tList);
+
+
+                 if (tList.size() > 0) {
+                     // Add the existing treasures to the MapSettings object
+                     for (Treasure t: tList) {
+                         mapSettings.addTreasure(t);
+                     }
+                 }
+             }
+
+
         }
         else
         {
@@ -88,6 +108,7 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
             // Ask user to enable GPS/network in settings
             gps.showSettingsAlert();
         }
+
 
     }
 

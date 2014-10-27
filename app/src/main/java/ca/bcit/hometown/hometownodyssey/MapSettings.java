@@ -9,6 +9,7 @@ import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Random;
 
 import static android.graphics.Color.HSVToColor;
@@ -95,6 +96,11 @@ public class MapSettings implements Serializable {
         // Create the treasure
         treasures[numTreasures] = new Treasure(pos, type);
 
+        //set the treasure's date to current date when its created
+        Calendar c = Calendar.getInstance();
+        int date = c.get(Calendar.DATE);
+        treasures[numTreasures].setDate(date);
+
         mapAct.saveTreasure(treasures[numTreasures]);
 
         // Place the treasure
@@ -121,7 +127,13 @@ public class MapSettings implements Serializable {
         // Create the treasure
         treasures[numTreasures] = new Treasure(pos, type);
 
+        //set the treasure's date to current date when its created
+        Calendar c = Calendar.getInstance();
+        int date = c.get(Calendar.DATE);
+        treasures[numTreasures].setDate(date);
+
         mapAct.saveTreasure(treasures[numTreasures]);
+
 
         // Place the treasure
         placeTreasure(numTreasures);
@@ -160,8 +172,7 @@ public class MapSettings implements Serializable {
         c.setStrokeWidth(3);
 
         float hsv[] = { 45, 70, 93 };
-
-
+        c.setFillColor(Color.HSVToColor(125, hsv));
         treasures[i].setCircle(c);
     }
 

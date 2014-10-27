@@ -17,6 +17,7 @@ public class Player implements Serializable {
     private String name;
     private int money;
     private int level;
+    private int date;
 
     /**
      * Default Player constructor
@@ -83,6 +84,9 @@ public class Player implements Serializable {
         map = m;
     }
 
+
+    public void setDate(int d) { date = d; }
+
     /**
      * Returns the player's name
      *
@@ -140,4 +144,6 @@ public class Player implements Serializable {
     public double getLongitude() {
         return pos.longitude;
     }
+
+    public int getDate() { return date; }
 }

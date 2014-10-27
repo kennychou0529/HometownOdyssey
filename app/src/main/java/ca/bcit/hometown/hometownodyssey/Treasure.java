@@ -15,16 +15,19 @@ public class Treasure {
     private Marker treasure;
     private CircleOptions aura;
     private Circle aCircle;
+    private int date;
     /** 0 = money, 1 = item, 2 = special item */
     private int type;
 
     public Treasure(LatLng pos, int t) {
         type = t;
+        date = 0;
 
         // Create the MarkerOptions object
         tPin = new MarkerOptions();
         tPin.position(pos);
         tPin.title("Treasure");
+        tPin.anchor(0.5f, 0.5f);
         tPin.icon(BitmapDescriptorFactory.fromResource(R.drawable.chest));
 
         // Create the aura
@@ -35,6 +38,8 @@ public class Treasure {
     public void setTreasure(Marker t) {
         treasure = t;
     }
+
+    public void setDate ( int d) { date = d; }
 
     public Marker getTreasure() {
         return treasure;
@@ -59,4 +64,6 @@ public class Treasure {
     public int getType() {
         return type;
     }
+
+    public int getDate() { return date; }
 }
