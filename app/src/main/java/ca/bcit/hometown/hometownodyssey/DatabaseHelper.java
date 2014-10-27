@@ -194,8 +194,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void saveTreasureData(Treasure t) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-
-            //TODO: ADD CORRECT VALUES FOR INVENTORY
             ContentValues values = new ContentValues();
             values.put(KEY_ID, idCounter);
             values.put(KEY_TYPE, t.getType());
@@ -264,7 +262,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         i.setId(idCounter);
 
-        //TODO: ADD CORRECT VALUES FOR INVENTORY
         ContentValues values = new ContentValues();
         values.put(KEY_ID, idCounter);
         values.put(KEY_TYPE, i.getType());

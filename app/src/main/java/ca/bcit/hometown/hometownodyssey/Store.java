@@ -179,24 +179,45 @@ public class Store extends Activity {
 
     public void initializeShopItems() {
         // Head Items
-        headItems.add(numHeadItems++, new Item("Mario Hat", "This is a hat from Mario", 0, 100,
-                getApplicationContext().getResources().getIdentifier("testhat", "drawable", getPackageName())));
-        headItems.add(numHeadItems++, new Item("Luigi Hat", "Just kidding still Mario", 0, 900,
-                getApplicationContext().getResources().getIdentifier("testhat", "drawable", getPackageName())));
-        headItems.add(numHeadItems++, new Item("Second Mario Hat", "This is also a hat from Mario", 0, 200,
-                getApplicationContext().getResources().getIdentifier("testhat", "drawable", getPackageName())));
-        headItems.add(numHeadItems++, new Item("Second Mario Hat", "This is also a hat from Mario", 0, 200,
-                getApplicationContext().getResources().getIdentifier("testhat", "drawable", getPackageName())));
+        headItems.add(numHeadItems++, new Item("Jack-o-lantern", "Spoopy.", 0, 300,
+                getApplicationContext().getResources().getIdentifier("ho_icon_jackolantern", "drawable", getPackageName())));
+        headItems.add(numHeadItems++, new Item("Jack-o-lantern", "Spoopy.", 0, 300,
+                getApplicationContext().getResources().getIdentifier("ho_icon_jackolantern", "drawable", getPackageName())));
+        headItems.add(numHeadItems++, new Item("Jack-o-lantern", "Spoopy.", 0, 300,
+                getApplicationContext().getResources().getIdentifier("ho_icon_jackolantern", "drawable", getPackageName())));
+        headItems.add(numHeadItems++, new Item("Jack-o-lantern", "Spoopy.", 0, 300,
+                getApplicationContext().getResources().getIdentifier("ho_icon_jackolantern", "drawable", getPackageName())));
 
         // Body Items
-        bodyItems.add(numBodyItems++, new Item("Mario Overalls", "Mario wears a hat for pants", 0, 300,
-                getApplicationContext().getResources().getIdentifier("testhat", "drawable", getPackageName())));
+        bodyItems.add(numBodyItems++, new Item("V-neck", "Everyone loves V-necks!", 0, 150,
+                getApplicationContext().getResources().getIdentifier("ho_icon_vneck", "drawable", getPackageName())));
+        bodyItems.add(numBodyItems++, new Item("V-neck", "Everyone loves V-necks!", 0, 150,
+                getApplicationContext().getResources().getIdentifier("ho_icon_vneck", "drawable", getPackageName())));
+        bodyItems.add(numBodyItems++, new Item("V-neck", "Everyone loves V-necks!", 0, 150,
+                getApplicationContext().getResources().getIdentifier("ho_icon_vneck", "drawable", getPackageName())));
+        bodyItems.add(numBodyItems++, new Item("V-neck", "Everyone loves V-necks!", 0, 150,
+                getApplicationContext().getResources().getIdentifier("ho_icon_vneck", "drawable", getPackageName())));
 
 
         // Leg Items
-
+        legItems.add(numLegItems++, new Item("Skeleton Pants", "You're looking a little thin.", 0, 200,
+                getApplicationContext().getResources().getIdentifier("ho_icon_skeletonpants", "drawable", getPackageName())));
+        legItems.add(numLegItems++, new Item("Skeleton Pants", "You're looking a little thin.", 0, 200,
+                getApplicationContext().getResources().getIdentifier("ho_icon_skeletonpants", "drawable", getPackageName())));
+        legItems.add(numLegItems++, new Item("Skeleton Pants", "You're looking a little thin.", 0, 200,
+                getApplicationContext().getResources().getIdentifier("ho_icon_skeletonpants", "drawable", getPackageName())));
+        legItems.add(numLegItems++, new Item("Skeleton Pants", "You're looking a little thin.", 0, 200,
+                getApplicationContext().getResources().getIdentifier("ho_icon_skeletonpants", "drawable", getPackageName())));
 
 
         // Foot Items
+        footItems.add(numFootItems++, new Item("Sandals", "Actually, they're called thongs.", 0, 100,
+                getApplicationContext().getResources().getIdentifier("ho_icon_sandal", "drawable", getPackageName())));
+        footItems.add(numFootItems++, new Item("Sandals", "Actually, they're called thongs.", 0, 100,
+                getApplicationContext().getResources().getIdentifier("ho_icon_sandal", "drawable", getPackageName())));
+        footItems.add(numFootItems++, new Item("Sandals", "Actually, they're called thongs.", 0, 100,
+                getApplicationContext().getResources().getIdentifier("ho_icon_sandal", "drawable", getPackageName())));
+        footItems.add(numFootItems++, new Item("Sandals", "Actually, they're called thongs.", 0, 100,
+                getApplicationContext().getResources().getIdentifier("ho_icon_sandal", "drawable", getPackageName())));
     }
 }
