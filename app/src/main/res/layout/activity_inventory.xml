@@ -1,16 +1,79 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ca.bcit.hometown.hometownodyssey.Inventory"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="ca.bcit.hometown.hometownodyssey.Inventory">
+    android:orientation="horizontal"
+    android:background="@color/bgColor">
 
-    <TextView
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="#D2DF69"
+            android:layout_margin="10dp"
+            >
 
-</RelativeLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="0.25"
+                android:id="@+id/headInv"
+                android:src="@drawable/temphead"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:onClick="loadHeadItems"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="0.25"
+                android:id="@+id/bodyInv"
+                android:adjustViewBounds="true"
+                android:src="@drawable/temptop"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:onClick="loadBodyItems"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="0.25"
+                android:id="@+id/legInv"
+                android:adjustViewBounds="true"
+                android:src="@drawable/temppants"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:onClick="loadLegItems"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="0.25"
+                android:id="@+id/footInv"
+                android:adjustViewBounds="true"
+                android:src="@drawable/tempshoes"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:onClick="loadFootItems"/>
+        </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="0.5"
+        android:background="#D2DF69"
+        >
+        <LinearLayout
+            android:id="@+id/scrollingInv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
