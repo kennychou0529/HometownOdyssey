@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
+
 
 public class Inventory extends Activity {
     private static DatabaseHelper db;
@@ -18,17 +20,52 @@ public class Inventory extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inventory);
 
+        // Create a new database helper
+        db = DatabaseHelper.getInstance(this);
+
         //Pull equipped items from person class and change the source
         ImageButton headButton = (ImageButton) findViewById(R.id.headInv);
         ImageButton bodyButton = (ImageButton) findViewById(R.id.bodyInv);
         ImageButton legButton = (ImageButton) findViewById(R.id.legInv);
         ImageButton footButton = (ImageButton) findViewById(R.id.footInv);
 
-        //Change the source
-        legButton.setImageResource(R.drawable.ho_icon_skeletonpants);
+        // Retrieve the player object from the database
+        Player player = new Player( "TEMP" );
+        db.buildPlayer( player );
 
-        // Create a new database helper
-        db = DatabaseHelper.getInstance(this);
+        // Construct the current equipped items
+        Item headItem = new Item();
+        Item bodyItem = new Item();
+        Item legItem = new Item();
+        Item footItem = new Item();
+
+        if ( player.getHeadItem() == "" ) {
+            headButton.setImageResource( R.drawable.temphead );
+        } else {
+            db.buildItem( headItem, player.getHeadItem() );
+            headButton.setImageResource(headItem.getImage());
+        }
+
+        if ( player.getBodyItem() == "" ) {
+            bodyButton.setImageResource( R.drawable.temptop );
+        } else {
+            db.buildItem( bodyItem, player.getBodyItem() );
+            bodyButton.setImageResource( bodyItem.getImage() );
+        }
+
+        if ( player.getLegItem() == "" ) {
+            legButton.setImageResource( R.drawable.temppants );
+        } else {
+            db.buildItem( legItem, player.getLegItem() );
+            legButton.setImageResource( legItem.getImage() );
+        }
+
+        if ( player.getFootItem() == "" ) {
+            footButton.setImageResource( R.drawable.tempshoes );
+        } else {
+            db.buildItem( footItem, player.getFootItem() );
+            footButton.setImageResource( footItem.getImage() );
+        }
 
         //Populate grid with head items by default
         GridView gridview = (GridView) findViewById(R.id.styleGridView);
@@ -38,13 +75,13 @@ public class Inventory extends Activity {
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
                                     int position, long id) {
+                ArrayList<Item> iList = new ArrayList<Item>();
+                db.buildInventorySection( iList, 0 );
 
-               // Item currentItem =  db.getItemAt(pos, headSection);
-                Item tempItem = new Item("Pumpkinhead", "Fuck you pumpkin head.", 0, 300, R.drawable.ho_icon_jackolantern);
-
+                Item tempItem = iList.get( position );
 
                 //Create popup for each item
-                ItemPopup popup = new ItemPopup(v.getContext(), tempItem);
+                ItemPopup popup = new ItemPopup( v.getContext(), tempItem );
             }
         });
     }
@@ -71,9 +108,25 @@ public class Inventory extends Activity {
 
     public void loadHeadItems(View v)
     {
-      //Empty linear layout
-      //Pull all obtained head items from DB
-      //Populate list
+        //Empty linear layout
+        GridView grid = (GridView) findViewById( R.id.styleGridView );
+
+        final InventoryGridAdapter gridAdapter = new InventoryGridAdapter(this, "head");
+        grid.setAdapter(gridAdapter);
+
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                ArrayList<Item> iList = new ArrayList<Item>();
+                db.buildInventorySection( iList, 0 );
+
+                Item tempItem = iList.get( position );
+
+                //Create popup for each item
+                ItemPopup popup = new ItemPopup( v.getContext(), tempItem );
+            }
+        });
+
 
     }
 

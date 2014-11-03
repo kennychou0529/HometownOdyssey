@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static DatabaseHelper sInstance;
 
     private int idCounter = 0;
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "The Vault";
     private static final String PLAYER_TABLE_NAME = "Player";
     private static final String INVENTORY_TABLE_NAME = "Inventory";
@@ -39,7 +39,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_DATE = "currentDate";
 
     //Inventory table rows
-    private static final String KEY_TYPE = "type";
+    private static final String KEY_TYPE = "_type";
     private static final String KEY_VALUE = "value";
     private static final String KEY_TEXT = "text";
     private static final String KEY_IMAGE = "image";
@@ -65,7 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String INVENTORY_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + INVENTORY_TABLE_NAME + "("  +
             KEY_ID + " INTEGER PRIMARY KEY, " +
-            KEY_TYPE + "INTEGER NOT NULL, " +
+            KEY_TYPE + " INTEGER NOT NULL, " +
             KEY_NAME + " TEXT NOT NULL, " +
             KEY_TEXT + " TEXT NOT NULL, " +
             KEY_IMAGE + " INTEGER NOT NULL, " +
@@ -291,11 +291,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void buildInventory(ArrayList<Item> iList) {
+    public void buildItem(Item item, String name) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor;
 
-        String selectQuery = "SELECT * FROM " + INVENTORY_TABLE_NAME;
+        String selectQuery = "SELECT * FROM " + INVENTORY_TABLE_NAME + " WHERE " +
+                KEY_NAME + " = " + name;
+        cursor = db.rawQuery(selectQuery, null);
+
+        // Construct the item
+        if ( cursor.getCount() > 0 ) {
+            cursor.moveToFirst();
+
+            item.setName( cursor.getString(
+                    cursor.getColumnIndex( KEY_NAME )
+            ));
+            item.setType( cursor.getInt(
+                    cursor.getColumnIndex( KEY_TYPE )
+            ));
+            item.setValue( cursor.getInt(
+                    cursor.getColumnIndex( KEY_VALUE )
+            ));
+            item.setText( cursor.getString(
+                    cursor.getColumnIndex( KEY_TEXT )
+            ));
+            item.setImage( cursor.getInt(
+                    cursor.getColumnIndex( KEY_IMAGE )
+            ));
+        }
+    }
+
+    public void buildInventorySection(ArrayList<Item> iList, int type) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor;
+
+        String selectQuery = "SELECT * FROM " + INVENTORY_TABLE_NAME + " WHERE " +
+                KEY_TYPE + " = " + type;
+
         cursor = db.rawQuery(selectQuery, null);
 
         //Iterate through all rows

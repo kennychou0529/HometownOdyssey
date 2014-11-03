@@ -11,6 +11,14 @@ public class Item {
     private int imageID;
     private int value;
 
+    public Item() {
+        name = "";
+        text = "";
+        value = 0;
+        type = 0;
+        imageID = 0;
+    }
+
     public Item(String n, String t, int ty, int v, int img) {
         name = n;
         text = t;
@@ -21,6 +29,26 @@ public class Item {
 
     public void setId(int i) {
         id = i;
+    }
+
+    public void setType(int t) {
+        type = t;
+    }
+
+    public void setName(String s) {
+        name = s;
+    }
+
+    public void setText(String t) {
+       text = t;
+    }
+
+    public void setImage(int id) {
+        imageID = id;
+    }
+
+    public void setValue(int v) {
+        value = v;
     }
 
     public int getId() {

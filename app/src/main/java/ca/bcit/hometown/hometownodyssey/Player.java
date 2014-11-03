@@ -18,6 +18,10 @@ public class Player implements Serializable {
     private int money;
     private int level;
     private int date;
+    private String headItem;
+    private String bodyItem;
+    private String legItem;
+    private String footItem;
 
     /**
      * Default Player constructor
@@ -28,6 +32,10 @@ public class Player implements Serializable {
         name = n;
         money = 0;
         level = 1;
+        headItem = "";
+        bodyItem = "";
+        legItem = "";
+        footItem = "";
     }
 
     public void updateMapPosition() {
@@ -41,6 +49,42 @@ public class Player implements Serializable {
      */
     public void setPlayerName(String n) {
         name = n;
+    }
+
+    /**
+     * Sets the player's head item
+     *
+     * @param i the item to be set
+     */
+    public void setHeadItem(String i) {
+        headItem = i;
+    }
+
+    /**
+     * Sets the player's body item
+     *
+     * @param i the item to be set
+     */
+    public void setBodyItem(String i) {
+        bodyItem = i;
+    }
+
+    /**
+     * Sets the player's leg item
+     *
+     * @param i the item to be set
+     */
+    public void setLegItem(String i) {
+        legItem = i;
+    }
+
+    /**
+     * Sets the player's foot item
+     *
+     * @param i the item to be set
+     */
+    public void setFootItem(String i) {
+        footItem = i;
     }
 
     /**
@@ -95,6 +139,35 @@ public class Player implements Serializable {
     public String getPlayerName() {
         return name;
     }
+
+    /**
+     * Returns the player's head item
+     */
+    public String getHeadItem() {
+        return headItem;
+    }
+
+    /**
+     * Returns the player's body item
+     */
+    public String getBodyItem() {
+        return bodyItem;
+    }
+
+    /**
+     * Returns the player's leg item
+     */
+    public String getLegItem() {
+        return legItem;
+    }
+
+    /**
+     * Returns the player's foot item
+     */
+    public String getFootItem() {
+        return footItem;
+    }
+
 
     /**
      * Returns the player's money count

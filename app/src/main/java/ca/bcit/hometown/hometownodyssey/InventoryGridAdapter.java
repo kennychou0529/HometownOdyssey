@@ -19,26 +19,28 @@ import java.util.ArrayList;
  * Created by Rhea on 02/11/2014.
  */
 public class InventoryGridAdapter extends BaseAdapter{
-
+        private DatabaseHelper db;
         private Context context;
         //list of image resource ID's for population of the grid
-        private ArrayList<Integer> imageIds = new ArrayList<Integer>();
-        int numImages = 0;
+        private ArrayList<Item> items = new ArrayList<Item>();
+        int numItems = 0;
 
 
         public InventoryGridAdapter(Context c, String section) {
+            db = DatabaseHelper.getInstance(c);
             context = c;
+
             buildImageList(section);
         }
 
         @Override
         public int getCount() {
-            return imageIds.size();
+            return items.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return imageIds.get(position);
+            return items.get(position);
         }
 
         @Override
@@ -61,7 +63,6 @@ public class InventoryGridAdapter extends BaseAdapter{
             }
 
             //Get the image and text view for the square
-
             iview = (ImageView) llview.findViewById(R.id.gridImage);
             tv = (TextView) llview.findViewById(R.id.gridText);
 
@@ -77,9 +78,9 @@ public class InventoryGridAdapter extends BaseAdapter{
             iview.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height/3));
             iview.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
-            iview.setImageResource(imageIds.get(position));
+            iview.setImageResource( items.get(position).getImage() );
 
-            tv.setText("Pumpkin");
+            tv.setText( items.get( position ).getName() );
 
             return llview;
         }
@@ -89,21 +90,44 @@ public class InventoryGridAdapter extends BaseAdapter{
         //TODO: BUILD THIS ARRAY LIST DYNAMICALLY FROM DATABASE
         public void buildImageList(String section)
         {
-            if (section == "head")
-            {
-                    imageIds.add(numImages, R.drawable.ho_icon_jackolantern );
-                    imageIds.add(numImages, R.drawable.ho_icon_jackolantern );
-                    imageIds.add(numImages, R.drawable.ho_icon_jackolantern );
-                    imageIds.add(numImages, R.drawable.ho_icon_jackolantern );
-                    imageIds.add(numImages, R.drawable.ho_icon_jackolantern );
-                    numImages += 5;
+            if (section.equals( "head" ) ) {
+                ArrayList<Item> iList = new ArrayList<Item>();
+                db.buildInventorySection( iList, 0 );
 
+                for ( Item i : iList ) {
+                    items.add( numItems, i );
+                    numItems++;
+                }
+            } else if ( section.equals( "body" ) ) {
+                ArrayList<Item> iList = new ArrayList<Item>();
+                db.buildInventorySection( iList, 1 );
+
+                for ( Item i : iList ) {
+                    items.add( numItems, i );
+                    numItems++;
+                }
+            } else if ( section.equals( "leg" ) ) {
+                ArrayList<Item> iList = new ArrayList<Item>();
+                db.buildInventorySection( iList, 2 );
+
+                for ( Item i : iList ) {
+                    items.add( numItems, i );
+                    numItems++;
+                }
+            } else if ( section.equals( "foot" ) ) {
+                ArrayList<Item> iList = new ArrayList<Item>();
+                db.buildInventorySection( iList, 3 );
+
+                for ( Item i : iList ) {
+                    items.add( numItems, i );
+                    numItems++;
+                }
             }
 
         }
 
-        public ArrayList<Integer> getImageList()
+        public ArrayList<Item> getImageList()
         {
-            return imageIds;
+            return items;
         }
 }
