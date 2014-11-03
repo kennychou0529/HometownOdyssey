@@ -40,9 +40,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //Inventory table rows
     private static final String KEY_TYPE = "_type";
-    private static final String KEY_VALUE = "value";
-    private static final String KEY_TEXT = "text";
-    private static final String KEY_IMAGE = "image";
+    private static final String KEY_VALUE = "_value";
+    private static final String KEY_TEXT = "_text";
+    private static final String KEY_IMAGE = "_image";
 
     //Treasure rows
     private static final String KEY_LAT = "latitude";
@@ -329,6 +329,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 KEY_TYPE + " = " + type;
 
         cursor = db.rawQuery(selectQuery, null);
+
+        if ( cursor.getCount() == 0 )
+        {
+            Log.d("WHY", "WHY: " + type);
+        }
 
         //Iterate through all rows
         if (cursor.moveToFirst()) {
