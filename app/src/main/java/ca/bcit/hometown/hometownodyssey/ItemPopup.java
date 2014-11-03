@@ -8,6 +8,7 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +18,7 @@ import android.widget.TextView;
 public class ItemPopup extends Dialog {
 
         Context context;
-        public ItemPopup(final Context context, Item currItem) {
+        public ItemPopup(final Context context, final Item currItem) {
             super(context);
             this.context = context;
 
@@ -55,7 +56,36 @@ public class ItemPopup extends Dialog {
 
                 @Override
                 public void onClick(View v) {
+                    DatabaseHelper db = DatabaseHelper.getInstance( context );
+                    Player p = new Player( "TEMP" );
+                    db.buildPlayer( p );
+
                     //Change characters equipped item to this
+                    switch( currItem.getType() ) {
+                        case 0:
+                            ImageButton headButton = (ImageButton) ((Activity) context).findViewById( R.id.headInv );
+                            headButton.setImageResource( R.drawable.temptop );
+                            headButton.setImageResource( currItem.getImage() );
+                            p.setHeadItem( currItem.getName() );
+                            break;
+                        case 1:
+                            ImageButton bodyButton = (ImageButton) ((Activity) context).findViewById( R.id.bodyInv );
+                            bodyButton.setImageResource( currItem.getImage() );
+                            p.setBodyItem(currItem.getName());
+                            break;
+                        case 2:
+                            ImageButton legButton = (ImageButton) ((Activity) context).findViewById( R.id.legInv );
+                            legButton.setImageResource( currItem.getImage() );
+                            p.setLegItem(currItem.getName());
+                            break;
+                        case 3:
+                            ImageButton footButton = (ImageButton) ((Activity) context).findViewById( R.id.footInv );
+                            footButton.setImageResource( currItem.getImage() );
+                            p.setFootItem(currItem.getName());
+                            break;
+                    }
+
+                    db.savePlayerData( p );
                 }
 
             });

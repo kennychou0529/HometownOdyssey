@@ -27,7 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TREASURE_TABLE_NAME = "Treasures";
     private static final String TRADER_TABLE_NAME = "Trader";
     //Rows in table
-    private static final String KEY_ID = "id";
+    private static final String KEY_ID = "_id";
     //Player table rows
     private static final String KEY_MONEY = "money";
     private static final String KEY_HEAD_ITEM = "headItem";
@@ -53,34 +53,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_AVAIL = "Availability";
 
     private static final String PLAYER_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + PLAYER_TABLE_NAME + " ("  +
-            KEY_ID + " INTEGER PRIMARY KEY , " +
+            KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
             KEY_NAME + " TEXT NOT NULL , " +
             KEY_LEVEL + " INTEGER , " +
             KEY_MONEY + " INTEGER , " +
             KEY_DATE + " INTEGER , " +
-            KEY_HEAD_ITEM + " INTEGER , " +
-            KEY_BODY_ITEM + " INTEGER , " +
-            KEY_LEG_ITEM + " INTEGER , " +
-            KEY_FOOT_ITEM + " INTEGER );";
+            KEY_HEAD_ITEM + " TEXT , " +
+            KEY_BODY_ITEM + " TEXT , " +
+            KEY_LEG_ITEM + " TEXT , " +
+            KEY_FOOT_ITEM + " TEXT );";
 
     private static final String INVENTORY_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + INVENTORY_TABLE_NAME + "("  +
-            KEY_ID + " INTEGER PRIMARY KEY, " +
+            KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             KEY_TYPE + " INTEGER NOT NULL, " +
             KEY_NAME + " TEXT NOT NULL, " +
             KEY_TEXT + " TEXT NOT NULL, " +
             KEY_IMAGE + " INTEGER NOT NULL, " +
-            KEY_VALUE + "INTEGER );";
+            KEY_VALUE + " INTEGER );";
 
 
     private static final String TREASURE_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + TREASURE_TABLE_NAME + "("  +
-            KEY_ID + " INTEGER PRIMARY KEY, " +
+            KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             KEY_TYPE + " INTEGER NOT NULL , " +
             KEY_LONG + " REAL  NOT NULL, " +
             KEY_LAT + " REAL NOT NULL, " +
             KEY_DATE + " INTEGER );";
 
     private static final String TRADER_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + TRADER_TABLE_NAME + "("  +
-            KEY_ID + " INTEGER PRIMARY KEY, " +
+            KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
             KEY_LAT + " DOUBLE  NOT NULL, " +
             KEY_AVAIL + " INTEGER  NOT NULL, " +
             KEY_TIME + "FLOAT );";
@@ -118,16 +118,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT * from " + PLAYER_TABLE_NAME, null);
-        //TODO: ADD CORRECT VALUES FOR INVENTORY
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, 1);
         values.put(KEY_NAME,  p.getPlayerName());
         values.put(KEY_LEVEL, p.getLevel());
         values.put(KEY_MONEY, 100000);
-        values.put(KEY_HEAD_ITEM, 0);
-        values.put(KEY_BODY_ITEM, 0);
-        values.put(KEY_LEG_ITEM, 0);
-        values.put(KEY_FOOT_ITEM, 0);
+        values.put(KEY_HEAD_ITEM, p.getHeadItem());
+        values.put(KEY_BODY_ITEM, p.getBodyItem());
+        values.put(KEY_LEG_ITEM, p.getLegItem());
+        values.put(KEY_FOOT_ITEM, p.getFootItem());
         values.put(KEY_DATE, p.getDate());
 
        if (cursor.getCount() < 1)
@@ -137,7 +135,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         else
        {
-           db.update(PLAYER_TABLE_NAME, values, "id = 1", null );
+           db.update(PLAYER_TABLE_NAME, values, KEY_ID + " = 1", null );
        }
 
         db.close();
@@ -186,13 +184,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         // Player Date
-        cursor = db.rawQuery("SELECT " + KEY_DATE+ " FROM " + PLAYER_TABLE_NAME, null);
+        cursor = db.rawQuery("SELECT " + KEY_DATE + " FROM " + PLAYER_TABLE_NAME, null);
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             p.setDate(cursor.getInt(0));
         }
 
-        // TODO: Player equipment loading
+        // Player Head Item
+        cursor = db.rawQuery("SELECT " + KEY_HEAD_ITEM + " FROM " + PLAYER_TABLE_NAME, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            p.setHeadItem(cursor.getString(0));
+        }
+
+        // Player Body Item
+        cursor = db.rawQuery("SELECT " + KEY_BODY_ITEM + " FROM " + PLAYER_TABLE_NAME, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            p.setBodyItem(cursor.getString(0));
+        }
+
+        // Player Leg Item
+        cursor = db.rawQuery("SELECT " + KEY_LEG_ITEM + " FROM " + PLAYER_TABLE_NAME, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            p.setLegItem(cursor.getString(0));
+        }
+
+        // Player Foot Item
+        cursor = db.rawQuery("SELECT " + KEY_FOOT_ITEM + " FROM " + PLAYER_TABLE_NAME, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            p.setFootItem(cursor.getString(0));
+        }
+
+
         db.close();
     }
 
@@ -209,7 +235,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
             ContentValues values = new ContentValues();
-            values.put(KEY_ID, idCounter);
             values.put(KEY_TYPE, t.getType());
             values.put(KEY_LAT, t.getPin().getPosition().latitude);
             values.put(KEY_LONG, t.getPin().getPosition().longitude);
@@ -217,7 +242,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             Log.d("Adding new treasure: ", "treasure being added.");
             db.insert(TREASURE_TABLE_NAME, null, values);
-            idCounter++;
         db.close();
     }
 
@@ -276,17 +300,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void saveItemData(Item i) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        i.setId(idCounter);
-
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, idCounter);
         values.put(KEY_TYPE, i.getType());
         values.put(KEY_NAME, i.getName());
+        values.put(KEY_TEXT, i.getText());
         values.put(KEY_VALUE, i.getValue());
+        values.put(KEY_IMAGE, i.getImage());
 
         Log.d("Adding new item: ", "item being added.");
         db.insert(INVENTORY_TABLE_NAME, null, values);
-        idCounter++;
 
         db.close();
     }
@@ -332,7 +354,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if ( cursor.getCount() == 0 )
         {
-            Log.d("WHY", "WHY: " + type);
+            Log.d("FUCK YOUR FACE", "WHY: " + type);
         }
 
         //Iterate through all rows
