@@ -5,12 +5,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 
 public class Inventory extends Activity {
+    private static DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,34 +24,29 @@ public class Inventory extends Activity {
         ImageButton legButton = (ImageButton) findViewById(R.id.legInv);
         ImageButton footButton = (ImageButton) findViewById(R.id.footInv);
 
-        //Change teh source
+        //Change the source
         legButton.setImageResource(R.drawable.ho_icon_skeletonpants);
 
-        //Load head items by default into the listview
-        //Probably get an array list of drawable id's from database?
-        ImageView image = new ImageView(this);
-        image.setBackgroundResource(R.drawable.ho_icon_jackolantern);
-        image.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        // Create a new database helper
+        db = DatabaseHelper.getInstance(this);
 
-        ImageView image2 = new ImageView(this);
-        image2.setBackgroundResource(R.drawable.ho_icon_sandal);
-        image2.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        //Populate grid with head items by default
+        GridView gridview = (GridView) findViewById(R.id.styleGridView);
+        final InventoryGridAdapter gridAdapter = new InventoryGridAdapter(this, "head");
+        gridview.setAdapter(gridAdapter);
 
-        ImageView image3 = new ImageView(this);
-        image3.setBackgroundResource(R.drawable.ho_icon_skeletonpants);
-        image3.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
 
-        ImageView image4 = new ImageView(this);
-        image4.setBackgroundResource(R.drawable.ho_icon_jackolantern);
-        image4.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+               // Item currentItem =  db.getItemAt(pos, headSection);
+                Item tempItem = new Item("Pumpkinhead", "Fuck you pumpkin head.", 0, 300, R.drawable.ho_icon_jackolantern);
 
 
-        LinearLayout ll = (LinearLayout) findViewById(R.id.scrollingInv);
-        ll.addView(image);
-        ll.addView(image2);
-        ll.addView(image3);
-        ll.addView(image4);
-
+                //Create popup for each item
+                ItemPopup popup = new ItemPopup(v.getContext(), tempItem);
+            }
+        });
     }
 
 
