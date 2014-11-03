@@ -296,7 +296,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor;
 
         String selectQuery = "SELECT * FROM " + INVENTORY_TABLE_NAME + " WHERE " +
-                KEY_NAME + " = " + name;
+                KEY_NAME + " = \"" + name + "\"";
         cursor = db.rawQuery(selectQuery, null);
 
         // Construct the item
@@ -332,6 +332,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         //Iterate through all rows
         if (cursor.moveToFirst()) {
+
             do {
                 Item temp = new Item(cursor.getString(2), cursor.getString(3), cursor.getInt(1),
                         cursor.getInt(5), cursor.getInt(4));

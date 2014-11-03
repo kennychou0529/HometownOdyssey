@@ -108,7 +108,6 @@ public class Inventory extends Activity {
 
     public void loadHeadItems(View v)
     {
-        //Empty linear layout
         GridView grid = (GridView) findViewById( R.id.styleGridView );
 
         final InventoryGridAdapter gridAdapter = new InventoryGridAdapter(this, "head");
@@ -126,23 +125,69 @@ public class Inventory extends Activity {
                 ItemPopup popup = new ItemPopup( v.getContext(), tempItem );
             }
         });
-
-
     }
 
     public void loadBodyItems(View v)
     {
+        GridView grid = (GridView) findViewById( R.id.styleGridView );
 
+        final InventoryGridAdapter gridAdapter = new InventoryGridAdapter(this, "body");
+        grid.setAdapter(gridAdapter);
+
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                ArrayList<Item> iList = new ArrayList<Item>();
+                db.buildInventorySection( iList, 1 );
+
+                Item tempItem = iList.get( position );
+
+                //Create popup for each item
+                ItemPopup popup = new ItemPopup( v.getContext(), tempItem );
+            }
+        });
     }
 
     public void loadLegItems(View v)
     {
+        GridView grid = (GridView) findViewById( R.id.styleGridView );
 
+        final InventoryGridAdapter gridAdapter = new InventoryGridAdapter(this, "leg");
+        grid.setAdapter(gridAdapter);
+
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                ArrayList<Item> iList = new ArrayList<Item>();
+                db.buildInventorySection( iList, 2 );
+
+                Item tempItem = iList.get( position );
+
+                //Create popup for each item
+                ItemPopup popup = new ItemPopup( v.getContext(), tempItem );
+            }
+        });
     }
 
     public void loadFootItems(View v)
     {
+        GridView grid = (GridView) findViewById( R.id.styleGridView );
 
+        final InventoryGridAdapter gridAdapter = new InventoryGridAdapter(this, "foot");
+        grid.setAdapter(gridAdapter);
+
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                ArrayList<Item> iList = new ArrayList<Item>();
+                db.buildInventorySection( iList, 3 );
+
+                Item tempItem = iList.get( position );
+
+                //Create popup for each item
+                ItemPopup popup = new ItemPopup( v.getContext(), tempItem );
+            }
+        });
     }
 
 }
