@@ -358,6 +358,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
         //Iterate through all rows
+        Log.d("Rows:" , cursor.getCount() + " ");
         if (cursor.moveToFirst()) {
 
             do {

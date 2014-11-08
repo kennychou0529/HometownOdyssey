@@ -1,36 +1,11 @@
 package ca.bcit.hometown.hometownodyssey;
 
-/*
- * HorizontalListView.java v1.5
- *
- *
- * The MIT License
- * Copyright (c) 2011 Paul Soucy (paul@dev-smart.com)
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- */
 
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
@@ -58,10 +33,12 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     private OnItemSelectedListener mOnItemSelected;
     private OnItemClickListener mOnItemClicked;
     private boolean mDataChanged = false;
+    private Context c;
 
 
     public HorizontalListView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        c = context;
         initView();
     }
 
@@ -82,9 +59,10 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     }
 
     @Override
-    public void setOnItemClickListener(AdapterView.OnItemClickListener listener){
+    public void setOnItemClickListener(AdapterView.OnItemClickListener listener) {
         mOnItemClicked = listener;
     }
+
 
     private DataSetObserver mDataObserver = new DataSetObserver() {
 
@@ -141,12 +119,13 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     private void addAndMeasureChild(final View child, int viewPos) {
         LayoutParams params = child.getLayoutParams();
         if(params == null) {
-            params = new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT);
+            params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         }
 
         addViewInLayout(child, viewPos, params, true);
         child.measure(MeasureSpec.makeMeasureSpec(getWidth(), MeasureSpec.AT_MOST),
                 MeasureSpec.makeMeasureSpec(getHeight(), MeasureSpec.AT_MOST));
+
     }
 
     @Override
@@ -327,6 +306,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
+
             Rect viewRect = new Rect();
             for(int i=0;i<getChildCount();i++){
                 View child = getChildAt(i);
@@ -336,11 +316,9 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
                 int bottom = child.getBottom();
                 viewRect.set(left, top, right, bottom);
                 if(viewRect.contains((int)e.getX(), (int)e.getY())){
-                    if(mOnItemClicked != null){
-                        mOnItemClicked.onItemClick(HorizontalListView.this, child, mLeftViewIndex + 1 + i, mAdapter.getItemId( mLeftViewIndex + 1 + i ));
-                    }
-                    if(mOnItemSelected != null){
-                        mOnItemSelected.onItemSelected(HorizontalListView.this, child, mLeftViewIndex + 1 + i, mAdapter.getItemId( mLeftViewIndex + 1 + i ));
+                    if(mOnItemClicked != null) {
+                        Log.d("Item clicked", "single tap confirmed");
+                        mOnItemClicked.onItemClick(HorizontalListView.this, child, mLeftViewIndex + 1 + i, mAdapter.getItemId(mLeftViewIndex + 1 + i));
                     }
                     break;
                 }
