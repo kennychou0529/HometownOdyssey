@@ -63,6 +63,7 @@ public class Store extends Activity {
                 Item tempItem = (Item) bodyAdapter.getItem(position);
 
                 //Create popup for each item
+                //heyyyyyyyyyy yeahhhhhhhhhhhhh
                 StorePopup popup = new StorePopup( v.getContext(), tempItem );
             }
         });
