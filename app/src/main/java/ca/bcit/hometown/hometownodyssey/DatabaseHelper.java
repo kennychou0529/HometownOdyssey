@@ -121,7 +121,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(KEY_NAME,  p.getPlayerName());
         values.put(KEY_LEVEL, p.getLevel());
-        values.put(KEY_MONEY, 100000);
+        values.put(KEY_MONEY, p.getMoney());
         values.put(KEY_HEAD_ITEM, p.getHeadItem());
         values.put(KEY_BODY_ITEM, p.getBodyItem());
         values.put(KEY_LEG_ITEM, p.getLegItem());
@@ -351,11 +351,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 KEY_TYPE + " = " + type;
 
         cursor = db.rawQuery(selectQuery, null);
-
-        if ( cursor.getCount() == 0 )
-        {
-            Log.d("FUCK YOUR FACE", "WHY: " + type);
-        }
 
         //Iterate through all rows
         Log.d("Rows:" , cursor.getCount() + " ");

@@ -10,15 +10,28 @@
     android:background="@color/bgColor"
     android:orientation="vertical"
     tools:context="ca.bcit.hometown.hometownodyssey.Store">
-    >
 
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:text="HATS:"-->
+        <!--android:id="@+id/hatText" />-->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="HATS:"
-        android:id="@+id/hatText" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gold: 0"
+            android:id="@+id/store_gold"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true" />
+
+    </RelativeLayout>
 
     <ca.bcit.hometown.hometownodyssey.HorizontalListView
         android:layout_width="match_parent"
@@ -27,18 +40,19 @@
         android:id="@+id/headListView"
         android:background="#D2DF69"
         android:orientation="horizontal"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp"
+        android:paddingTop="@dimen/shop_list_padding"
+        android:paddingBottom="@dimen/shop_list_padding"
+        android:paddingRight="@dimen/shop_list_padding"
+        android:paddingLeft="@dimen/shop_list_padding"
+        android:layout_marginBottom="5dp"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="BODY:"
-        android:id="@+id/bodyText" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:text="BODY:"-->
+        <!--android:id="@+id/bodyText" />-->
 
     <ca.bcit.hometown.hometownodyssey.HorizontalListView
         android:layout_width="match_parent"
@@ -47,17 +61,18 @@
         android:id="@+id/bodyListView"
         android:background="#D2DF69"
         android:orientation="horizontal"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp"
+        android:paddingTop="@dimen/shop_list_padding"
+        android:paddingBottom="@dimen/shop_list_padding"
+        android:paddingRight="@dimen/shop_list_padding"
+        android:paddingLeft="@dimen/shop_list_padding"
+        android:layout_marginBottom="5dp"
         />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="LEG:"
-        android:id="@+id/LegText" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:text="LEG:"-->
+        <!--android:id="@+id/LegText" />-->
 
     <ca.bcit.hometown.hometownodyssey.HorizontalListView
         android:layout_width="match_parent"
@@ -66,18 +81,19 @@
         android:id="@+id/legListView"
         android:background="#D2DF69"
         android:orientation="horizontal"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp"
+        android:paddingTop="@dimen/shop_list_padding"
+        android:paddingBottom="@dimen/shop_list_padding"
+        android:paddingRight="@dimen/shop_list_padding"
+        android:paddingLeft="@dimen/shop_list_padding"
+        android:layout_marginBottom="5dp"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="FEET:"
-        android:id="@+id/FeetText" />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textAppearance="?android:attr/textAppearanceLarge"-->
+        <!--android:text="FEET:"-->
+        <!--android:id="@+id/FeetText" />-->
 
     <ca.bcit.hometown.hometownodyssey.HorizontalListView
         android:layout_width="match_parent"
@@ -86,10 +102,10 @@
         android:id="@+id/footListView"
         android:background="#D2DF69"
         android:orientation="horizontal"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:paddingRight="16dp"
-        android:paddingLeft="16dp"
+        android:paddingTop="@dimen/shop_list_padding"
+        android:paddingBottom="@dimen/shop_list_padding"
+        android:paddingRight="@dimen/shop_list_padding"
+        android:paddingLeft="@dimen/shop_list_padding"
         />
 
 </LinearLayout>

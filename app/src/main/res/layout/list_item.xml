@@ -3,26 +3,28 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingLeft="16dp"
-    android:paddingRight="20dp"
-    android:paddingTop="16dp"
-    android:paddingBottom="10dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
     >
 
     <ImageView
         android:id="@+id/shopItemImage"
-        android:layout_width="350px"
-        android:layout_height="wrap_content"
-        android:scaleType="fitCenter"
+        android:src="@drawable/temphead"
+        android:layout_width="90dp"
+        android:layout_height="70dp"
         android:layout_marginBottom="0dp"
+        android:layout_gravity="center_horizontal"
         />
 
     <TextView
         android:id="@+id/shopItemName"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:gravity="center_horizontal"
+        android:textSize="10sp"
+        android:text="THIS IS A TEST FOR LONG TEXT"
+        android:layout_gravity="center_horizontal"
         />
 
 </LinearLayout>

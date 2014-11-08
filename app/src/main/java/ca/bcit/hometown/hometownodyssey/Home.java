@@ -28,7 +28,7 @@ public class Home extends Activity implements OnFragmentInteractionListener {
             db.savePlayerData(player);
         } else {
             player.setPlayerName("CHRISTOFER");
-
+            player.addMoney( 50 );
             db.savePlayerData(player);
         }
 

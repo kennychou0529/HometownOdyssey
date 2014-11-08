@@ -2,11 +2,9 @@ package ca.bcit.hometown.hometownodyssey;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,75 +28,31 @@ public class Store extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
+
         setContentView(R.layout.activity_store);
 
         // Initialize shop items
         initializeShopItems();
 
-        //Head listview
         HorizontalListView listViewHead = (HorizontalListView) findViewById(R.id.headListView);
         listViewHead.setAdapter(headAdapter);
 
-        listViewHead.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-
-                Log.d("Clicked", "Item popup");
-
-                Item tempItem = (Item) headAdapter.getItem(position);
-
-                //Create popup for each item
-                StorePopup popup = new StorePopup( v.getContext(), tempItem );
-            }
-        });
-
-        //Body Listview
         HorizontalListView listViewBody = (HorizontalListView) findViewById(R.id.bodyListView);
         listViewBody.setAdapter(bodyAdapter);
 
-        listViewBody.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-
-                Item tempItem = (Item) bodyAdapter.getItem(position);
-
-                //Create popup for each item
-                StorePopup popup = new StorePopup( v.getContext(), tempItem );
-            }
-        });
-
-
-        //Leg listview
         HorizontalListView listViewLeg = (HorizontalListView) findViewById(R.id.legListView);
         listViewLeg.setAdapter(legAdapter);
 
-        listViewLeg.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
-
-                Item tempItem = (Item) legAdapter.getItem(position);
-
-                //Create popup for each item
-                StorePopup popup = new StorePopup( v.getContext(), tempItem );
-            }
-        });
-
-
-        //Foot listview
         HorizontalListView listViewFoot = (HorizontalListView) findViewById(R.id.footListView);
         listViewFoot.setAdapter(feetAdapter);
 
-        listViewFoot.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v,
-                                    int position, long id) {
+        // Get the player's current gold
+        DatabaseHelper db = DatabaseHelper.getInstance(this);
+        Player player = new Player( "TEMP" );
+        db.buildPlayer( player );
 
-                Item tempItem = (Item) feetAdapter.getItem(position);
-
-                //Create popup for each item
-                StorePopup popup = new StorePopup( v.getContext(), tempItem );
-            }
-        });
-
+        TextView gold = (TextView) findViewById( R.id.store_gold );
+        gold.setText( "Gold: " + player.getMoney() );
     }
 
     private BaseAdapter headAdapter = new BaseAdapter() {
@@ -109,10 +63,8 @@ public class Store extends Activity {
         }
 
         @Override
-        public Item  getItem(int position) {
-            Item i = headItems.get(position);
-
-            return i;
+        public Object getItem(int position) {
+            return null;
         }
 
         @Override
@@ -129,7 +81,7 @@ public class Store extends Activity {
             ImageView shopItemImage = (ImageView) v.findViewById(R.id.shopItemImage);
 
             int itemImage = headItems.get(position).getImage();
-            shopItemImage.setBackgroundResource(itemImage);
+            shopItemImage.setImageResource(itemImage);
 
             return v;
         }
@@ -143,10 +95,8 @@ public class Store extends Activity {
         }
 
         @Override
-        public Item  getItem(int position) {
-            Item i = bodyItems.get(position);
-
-            return i;
+        public Object getItem(int position) {
+            return null;
         }
 
         @Override
@@ -163,7 +113,7 @@ public class Store extends Activity {
             ImageView shopItemImage = (ImageView) v.findViewById(R.id.shopItemImage);
 
             int itemImage = bodyItems.get(position).getImage();
-            shopItemImage.setBackgroundResource(itemImage);
+            shopItemImage.setImageResource(itemImage);
 
             return v;
         }
@@ -177,10 +127,8 @@ public class Store extends Activity {
         }
 
         @Override
-        public Item getItem(int position) {
-            Item i = legItems.get(position);
-
-            return i;
+        public Object getItem(int position) {
+            return null;
         }
 
         @Override
@@ -197,7 +145,7 @@ public class Store extends Activity {
             ImageView shopItemImage = (ImageView) v.findViewById(R.id.shopItemImage);
 
             int itemImage = legItems.get(position).getImage();
-            shopItemImage.setBackgroundResource(itemImage);
+            shopItemImage.setImageResource(itemImage);
 
             return v;
         }
@@ -211,10 +159,8 @@ public class Store extends Activity {
         }
 
         @Override
-        public Item  getItem(int position) {
-            Item i = footItems.get(position);
-
-            return i;
+        public Object getItem(int position) {
+            return null;
         }
 
         @Override
@@ -231,7 +177,7 @@ public class Store extends Activity {
             ImageView shopItemImage = (ImageView) v.findViewById(R.id.shopItemImage);
 
             int itemImage = footItems.get(position).getImage();
-            shopItemImage.setBackgroundResource(itemImage);
+            shopItemImage.setImageResource(itemImage);
 
             return v;
         }
