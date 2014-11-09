@@ -28,15 +28,10 @@ public class Home extends Activity implements OnFragmentInteractionListener {
             db.savePlayerData(player);
         } else {
             player.setPlayerName("CHRISTOFER");
-            player.addMoney( 50 );
+            player.addMoney( 2000 );
             db.savePlayerData(player);
         }
 
-        // Make some temp inventory items
-        Item tempItem = new Item( "Jack-o-lantern", "This is a pumpkin", 0, 200, R.drawable.ho_icon_jackolantern );
-        db.saveItemData( tempItem );
-        tempItem = new Item( "V-neck", "This is a v-neck", 1, 300, R.drawable.ho_icon_vneck );
-        db.saveItemData( tempItem );
     }
 
     @Override

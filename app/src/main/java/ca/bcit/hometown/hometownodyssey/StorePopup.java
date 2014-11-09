@@ -10,6 +10,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Created by Rhea on 02/11/2014.
@@ -47,8 +48,12 @@ public class StorePopup extends Dialog {
         title.setText(currItem.getName());
 
         //change description to item's special description
-        TextView description=  (TextView) findViewById(R.id.descriptionText);
+        TextView description =  (TextView) findViewById(R.id.descriptionText);
         description.setText(currItem.getText());
+
+        //change description to item's special description
+        TextView cost =  (TextView) findViewById(R.id.price);
+        cost.setText( "Cost: " + currItem.getValue() );
 
         Button buyBttn = (Button) findViewById(R.id.buyButton);
         buyBttn.setText("Purchase " + currItem.getName());
@@ -56,8 +61,24 @@ public class StorePopup extends Dialog {
         buyBttn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //buy this item!
-                //remove moneys
+                // Build a player object
+                DatabaseHelper db = DatabaseHelper.getInstance( v.getContext() );
+                Player player = new Player( "TEMP" );
+                db.buildPlayer( player );
+
+                //Check if the player has enough money
+                if ( player.getMoney() >= currItem.getValue() ) {
+                    db.saveItemData( currItem );
+                    player.removeMoney( currItem.getValue() );
+                    db.savePlayerData( player );
+
+                    Toast.makeText( v.getContext(), "Item purchased!", Toast.LENGTH_SHORT ).show();
+
+                    // Close the popup
+                    dismiss();
+                } else {
+                    Toast.makeText( v.getContext(), "Not enough money!", Toast.LENGTH_SHORT ).show();
+                }
             }
 
         });

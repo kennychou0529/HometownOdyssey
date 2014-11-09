@@ -1,6 +1,7 @@
 package ca.bcit.hometown.hometownodyssey;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +27,9 @@ public class Store extends Activity {
     private int numLegItems = 0;
     private int numFootItems = 0;
 
+    DatabaseHelper db;
+    Player player;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +52,15 @@ public class Store extends Activity {
                 Item tempItem = (Item) headAdapter.getItem(position);
 
                 //Create popup for each item
-                StorePopup popup = new StorePopup( v.getContext(), tempItem );
+                StorePopup popup = new StorePopup(v.getContext(), tempItem);
+                popup.setOnDismissListener( new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        db.buildPlayer( player );
+                        TextView gold = (TextView) findViewById( R.id.store_gold );
+                        gold.setText( "Gold: " + player.getMoney() );
+                    }
+                });
             }
         });
 
@@ -63,8 +75,15 @@ public class Store extends Activity {
                 Item tempItem = (Item) bodyAdapter.getItem(position);
 
                 //Create popup for each item
-                //heyyyyyyyyyy yeahhhhhhhhhhhhh
                 StorePopup popup = new StorePopup( v.getContext(), tempItem );
+                popup.setOnDismissListener( new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        db.buildPlayer( player );
+                        TextView gold = (TextView) findViewById( R.id.store_gold );
+                        gold.setText( "Gold: " + player.getMoney() );
+                    }
+                });
             }
         });
 
@@ -81,6 +100,14 @@ public class Store extends Activity {
 
                 //Create popup for each item
                 StorePopup popup = new StorePopup( v.getContext(), tempItem );
+                popup.setOnDismissListener( new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        db.buildPlayer( player );
+                        TextView gold = (TextView) findViewById( R.id.store_gold );
+                        gold.setText( "Gold: " + player.getMoney() );
+                    }
+                });
             }
         });
 
@@ -97,9 +124,24 @@ public class Store extends Activity {
 
                 //Create popup for each item
                 StorePopup popup = new StorePopup( v.getContext(), tempItem );
+                popup.setOnDismissListener( new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialogInterface) {
+                        db.buildPlayer( player );
+                        TextView gold = (TextView) findViewById( R.id.store_gold );
+                        gold.setText( "Gold: " + player.getMoney() );
+                    }
+                });
             }
         });
 
+        // Get the player's current gold
+        db = DatabaseHelper.getInstance(this);
+        player = new Player( "TEMP" );
+        db.buildPlayer( player );
+
+        TextView gold = (TextView) findViewById( R.id.store_gold );
+        gold.setText( "Gold: " + player.getMoney() );
     }
 
     private BaseAdapter headAdapter = new BaseAdapter() {
@@ -130,7 +172,7 @@ public class Store extends Activity {
             ImageView shopItemImage = (ImageView) v.findViewById(R.id.shopItemImage);
 
             int itemImage = headItems.get(position).getImage();
-            shopItemImage.setBackgroundResource(itemImage);
+            shopItemImage.setImageResource(itemImage);
 
             return v;
         }
@@ -164,7 +206,7 @@ public class Store extends Activity {
             ImageView shopItemImage = (ImageView) v.findViewById(R.id.shopItemImage);
 
             int itemImage = bodyItems.get(position).getImage();
-            shopItemImage.setBackgroundResource(itemImage);
+            shopItemImage.setImageResource(itemImage);
 
             return v;
         }
@@ -198,7 +240,7 @@ public class Store extends Activity {
             ImageView shopItemImage = (ImageView) v.findViewById(R.id.shopItemImage);
 
             int itemImage = legItems.get(position).getImage();
-            shopItemImage.setBackgroundResource(itemImage);
+            shopItemImage.setImageResource(itemImage);
 
             return v;
         }
@@ -232,7 +274,7 @@ public class Store extends Activity {
             ImageView shopItemImage = (ImageView) v.findViewById(R.id.shopItemImage);
 
             int itemImage = footItems.get(position).getImage();
-            shopItemImage.setBackgroundResource(itemImage);
+            shopItemImage.setImageResource(itemImage);
 
             return v;
         }
@@ -252,35 +294,35 @@ public class Store extends Activity {
                 getApplicationContext().getResources().getIdentifier("ho_icon_jackolantern", "drawable", getPackageName())));
 
         // Body Items
-        bodyItems.add(numBodyItems++, new Item("V-neck", "Everyone loves V-necks!", 0, 150,
+        bodyItems.add(numBodyItems++, new Item("V-neck", "Everyone loves V-necks!", 1, 150,
                 getApplicationContext().getResources().getIdentifier("ho_icon_vneck", "drawable", getPackageName())));
-        bodyItems.add(numBodyItems++, new Item("V-neck", "Everyone loves V-necks!", 0, 150,
+        bodyItems.add(numBodyItems++, new Item("V-neck", "Everyone loves V-necks!", 1, 150,
                 getApplicationContext().getResources().getIdentifier("ho_icon_vneck", "drawable", getPackageName())));
-        bodyItems.add(numBodyItems++, new Item("V-neck", "Everyone loves V-necks!", 0, 150,
+        bodyItems.add(numBodyItems++, new Item("V-neck", "Everyone loves V-necks!", 1, 150,
                 getApplicationContext().getResources().getIdentifier("ho_icon_vneck", "drawable", getPackageName())));
-        bodyItems.add(numBodyItems++, new Item("V-neck", "Everyone loves V-necks!", 0, 150,
+        bodyItems.add(numBodyItems++, new Item("V-neck", "Everyone loves V-necks!", 1, 150,
                 getApplicationContext().getResources().getIdentifier("ho_icon_vneck", "drawable", getPackageName())));
 
 
         // Leg Items
-        legItems.add(numLegItems++, new Item("Skeleton Pants", "You're looking a little thin.", 0, 200,
+        legItems.add(numLegItems++, new Item("Skeleton Pants", "You're looking a little thin.", 2, 200,
                 getApplicationContext().getResources().getIdentifier("ho_icon_skeletonpants", "drawable", getPackageName())));
-        legItems.add(numLegItems++, new Item("Skeleton Pants", "You're looking a little thin.", 0, 200,
+        legItems.add(numLegItems++, new Item("Skeleton Pants", "You're looking a little thin.", 2, 200,
                 getApplicationContext().getResources().getIdentifier("ho_icon_skeletonpants", "drawable", getPackageName())));
-        legItems.add(numLegItems++, new Item("Skeleton Pants", "You're looking a little thin.", 0, 200,
+        legItems.add(numLegItems++, new Item("Skeleton Pants", "You're looking a little thin.", 2, 200,
                 getApplicationContext().getResources().getIdentifier("ho_icon_skeletonpants", "drawable", getPackageName())));
-        legItems.add(numLegItems++, new Item("Skeleton Pants", "You're looking a little thin.", 0, 200,
+        legItems.add(numLegItems++, new Item("Skeleton Pants", "You're looking a little thin.", 2, 200,
                 getApplicationContext().getResources().getIdentifier("ho_icon_skeletonpants", "drawable", getPackageName())));
 
 
         // Foot Items
-        footItems.add(numFootItems++, new Item("Sandals", "Actually, they're called thongs.", 0, 100,
+        footItems.add(numFootItems++, new Item("Sandals", "Actually, they're called thongs.", 3, 100,
                 getApplicationContext().getResources().getIdentifier("ho_icon_sandal", "drawable", getPackageName())));
-        footItems.add(numFootItems++, new Item("Sandals", "Actually, they're called thongs.", 0, 100,
+        footItems.add(numFootItems++, new Item("Sandals", "Actually, they're called thongs.", 3, 100,
                 getApplicationContext().getResources().getIdentifier("ho_icon_sandal", "drawable", getPackageName())));
-        footItems.add(numFootItems++, new Item("Sandals", "Actually, they're called thongs.", 0, 100,
+        footItems.add(numFootItems++, new Item("Sandals", "Actually, they're called thongs.", 3, 100,
                 getApplicationContext().getResources().getIdentifier("ho_icon_sandal", "drawable", getPackageName())));
-        footItems.add(numFootItems++, new Item("Sandals", "Actually, they're called thongs.", 0, 100,
+        footItems.add(numFootItems++, new Item("Sandals", "Actually, they're called thongs.", 3, 100,
                 getApplicationContext().getResources().getIdentifier("ho_icon_sandal", "drawable", getPackageName())));
     }
 }

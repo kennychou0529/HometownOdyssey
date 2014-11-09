@@ -105,6 +105,14 @@ public class Player implements Serializable {
         money += m;
     }
 
+    /**
+     * Subtracts from the player's money count
+     *
+     * @param m the money count
+     */
+    public void removeMoney(int m) {
+        money -= m;
+    }
 
     /**
      * Sets the player's level
