@@ -3,22 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bgColor"
-    android:orientation="horizontal"
-    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".Home"
     android:useDefaultMargins="false">
 
-    <!--<fragment android:name="ca.bcit.hometown.hometownodyssey.AdventureFragment"
+    <fragment android:name="ca.bcit.hometown.hometownodyssey.AdventureFragment"
         android:id="@+id/adventure_fragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_row="0"
-        android:layout_columnSpan="2"
-        tools:layout="@layout/fragment_adventure" />-->
+        android:layout_gravity="top"
+        tools:layout="@layout/fragment_adventure" />
 
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="35dp" />
+    
     <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:columnCount="2"
         android:rowCount="3"
         android:background="@color/bgColor">

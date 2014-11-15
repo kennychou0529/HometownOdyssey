@@ -2,6 +2,7 @@ package ca.bcit.hometown.hometownodyssey;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class Store extends Activity {
+public class Store extends Activity implements AdventureFragment.OnFragmentInteractionListener {
 
     private ArrayList<Item> headItems = new ArrayList<Item>(1);
     private ArrayList<Item> bodyItems = new ArrayList<Item>(1);
@@ -33,7 +34,6 @@ public class Store extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store);
         setContentView(R.layout.activity_store);
 
         // Initialize shop items
@@ -324,5 +324,10 @@ public class Store extends Activity {
                 getApplicationContext().getResources().getIdentifier("ho_icon_sandal", "drawable", getPackageName())));
         footItems.add(numFootItems++, new Item("Sandals", "Actually, they're called thongs.", 3, 100,
                 getApplicationContext().getResources().getIdentifier("ho_icon_sandal", "drawable", getPackageName())));
+    }
+
+
+    public void onFragmentInteraction(Uri uri) {
+        // Does nothing currently
     }
 }

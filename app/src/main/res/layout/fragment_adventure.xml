@@ -1,13 +1,109 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context="ca.bcit.hometown.hometownodyssey.AdventureFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+        <!-- Background layer 1 -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ho_f_bg_sky"
+            android:id="@+id/bg_layer1"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ho_f_bg_sky"
+            android:id="@+id/bg_layer1_2"/>
 
+        <!-- Background layer 2 -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ho_f_bg_mountains"
+            android:id="@+id/bg_layer2"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ho_f_bg_mountains"
+            android:id="@+id/bg_layer2_2"/>
+
+        <!-- Background layer 3 -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ho_f_bg_mountains2"
+            android:id="@+id/bg_layer3"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ho_f_bg_mountains2"
+            android:id="@+id/bg_layer3_2"/>
+
+        <!-- Character -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/char_leg"
+            android:src="@drawable/ho_f_char_leg"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/char_leg2"
+            android:src="@drawable/ho_f_char_leg2"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/char_arm2"
+            android:src="@drawable/ho_f_char_arm2"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/char_torso"
+            android:src="@drawable/ho_f_char_torso"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/char_arm"
+            android:src="@drawable/ho_f_char_arm"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/char_head"
+            android:src="@drawable/ho_f_char_head"/>
+
+    </RelativeLayout>
 </FrameLayout>

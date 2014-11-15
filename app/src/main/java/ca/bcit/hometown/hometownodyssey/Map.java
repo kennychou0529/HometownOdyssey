@@ -1,6 +1,7 @@
 package ca.bcit.hometown.hometownodyssey;
 
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -18,7 +19,7 @@ import java.util.Calendar;
 
 
 public class Map extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks,
-                                             GooglePlayServicesClient.OnConnectionFailedListener {
+                                             GooglePlayServicesClient.OnConnectionFailedListener, AdventureFragment.OnFragmentInteractionListener {
 
     LocationClient locationClient;
     Location currentLocation;
@@ -155,5 +156,10 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
 
     public void saveTreasure(Treasure t) {
         db.saveTreasureData(t);
+    }
+
+
+    public void onFragmentInteraction(Uri uri) {
+        // Does nothing currently
     }
 }

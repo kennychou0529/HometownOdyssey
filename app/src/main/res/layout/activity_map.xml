@@ -1,6 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/map"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:name="com.google.android.gms.maps.MapFragment"/>
+    android:background="@color/bgColor"
+    android:orientation="vertical"
+    tools:context=".Home"
+    android:useDefaultMargins="false">
+
+    <fragment android:name="ca.bcit.hometown.hometownodyssey.AdventureFragment"
+        android:id="@+id/adventure_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        tools:layout="@layout/fragment_adventure" />
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.google.android.gms.maps.MapFragment"/>
+
+</LinearLayout>

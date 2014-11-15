@@ -1,14 +1,19 @@
 package ca.bcit.hometown.hometownodyssey;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.content.Context;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +60,7 @@ public class AdventureFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -64,8 +70,59 @@ public class AdventureFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the view
+        View root = inflater.inflate(R.layout.fragment_adventure, container, false);
+
+        // Get image references
+        ImageView bg_layer1 = (ImageView) root.findViewById( R.id.bg_layer1 );
+        ImageView bg_layer2 = (ImageView) root.findViewById( R.id.bg_layer2 );
+        ImageView bg_layer3 = (ImageView) root.findViewById( R.id.bg_layer3 );
+
+        ImageView bg_layer1_2 = (ImageView) root.findViewById(R.id.bg_layer1_2);
+        ImageView bg_layer2_2 = (ImageView) root.findViewById(R.id.bg_layer2_2);
+        ImageView bg_layer3_2 = (ImageView) root.findViewById(R.id.bg_layer3_2);
+
+        ImageView char_arm = (ImageView) root.findViewById(R.id.char_arm);
+        ImageView char_arm_2 = (ImageView) root.findViewById(R.id.char_arm2);
+        ImageView char_leg = (ImageView) root.findViewById(R.id.char_leg);
+        ImageView char_leg_2 = (ImageView) root.findViewById(R.id.char_leg2);
+
+        // Create animations
+        Animation a_bg_layer1 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_bg_layer1 );
+        Animation a_bg_layer2 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_bg_layer2 );
+        Animation a_bg_layer3 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_bg_layer3 );
+        Animation a_bg_layer1_2 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_bg_layer1 );
+        Animation a_bg_layer2_2 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_bg_layer2 );
+        Animation a_bg_layer3_2 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_bg_layer3 );
+
+        Animation a_char_left = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_char_left_1 );
+        Animation a_char_right = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_char_right_1 );
+
+        // Set image segment start offsets
+        WindowManager wm = (WindowManager) root.getContext().getSystemService( Context.WINDOW_SERVICE );
+        Display display = wm.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize( size );
+        bg_layer1_2.setTranslationX( size.x );
+        bg_layer2_2.setTranslationX( size.x );
+        bg_layer3_2.setTranslationX( size.x );
+
+        //Set image segment images
+        bg_layer1.setAnimation( a_bg_layer1 );
+        bg_layer2.setAnimation( a_bg_layer2 );
+        bg_layer3.setAnimation( a_bg_layer3 );
+
+        bg_layer1_2.setAnimation( a_bg_layer1_2 );
+        bg_layer2_2.setAnimation( a_bg_layer2_2 );
+        bg_layer3_2.setAnimation( a_bg_layer3_2 );
+
+        char_arm.setAnimation( a_char_left );
+        char_arm_2.setAnimation( a_char_right );
+        char_leg.setAnimation( a_char_right );
+        char_leg_2.setAnimation( a_char_left );
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_adventure, container, false);
+        return root;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

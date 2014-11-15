@@ -1,6 +1,7 @@
 package ca.bcit.hometown.hometownodyssey;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,7 +13,7 @@ import android.widget.ImageButton;
 import java.util.ArrayList;
 
 
-public class Inventory extends Activity {
+public class Inventory extends Activity implements AdventureFragment.OnFragmentInteractionListener {
     private static DatabaseHelper db;
 
     @Override
@@ -188,6 +189,11 @@ public class Inventory extends Activity {
                 ItemPopup popup = new ItemPopup( v.getContext(), tempItem );
             }
         });
+    }
+
+
+    public void onFragmentInteraction(Uri uri) {
+        // Does nothing currently
     }
 
 }
