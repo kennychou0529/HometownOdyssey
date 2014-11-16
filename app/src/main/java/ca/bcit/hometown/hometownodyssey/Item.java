@@ -1,5 +1,9 @@
 package ca.bcit.hometown.hometownodyssey;
 
+import android.content.Context;
+
+import java.util.ArrayList;
+
 /**
  * Created by Chris on 2014-10-14.
  */
@@ -73,5 +77,84 @@ public class Item {
 
     public int getValue() {
         return value;
+    }
+
+    public static int getHeadImage( Context c ) {
+        // Build the player
+        DatabaseHelper db = DatabaseHelper.getInstance( c );
+        Player p = new Player( "TEMP" );
+
+        db.buildPlayer( p );
+
+        if ( p.getHeadItem().equalsIgnoreCase("Jack-o-lantern") ) {
+                return c.getResources().getIdentifier("ho_f_char_head", "drawable", c.getPackageName());
+        } else {
+            return c.getResources().getIdentifier("ho_f_char_head", "drawable", c.getPackageName());
+        }
+    }
+
+    public static ArrayList<Integer> getBodyImages( Context c ) {
+        // Build the player
+        DatabaseHelper db = DatabaseHelper.getInstance( c );
+        Player p = new Player( "TEMP" );
+
+        db.buildPlayer( p );
+
+        // Create the ArrayList
+        ArrayList<Integer> imageList = new ArrayList<Integer>();
+
+        if ( p.getHeadItem().equalsIgnoreCase( "V-neck" ) ) {
+            imageList.add( c.getResources().getIdentifier("ho_f_char_torso", "drawable", c.getPackageName() ) );
+            imageList.add( c.getResources().getIdentifier("ho_f_char_arm", "drawable", c.getPackageName() ) );
+            imageList.add( c.getResources().getIdentifier("ho_f_char_arm2", "drawable", c.getPackageName() ) );
+        } else {
+            imageList.add( c.getResources().getIdentifier("ho_f_char_torso", "drawable", c.getPackageName() ) );
+            imageList.add( c.getResources().getIdentifier("ho_f_char_arm", "drawable", c.getPackageName() ) );
+            imageList.add( c.getResources().getIdentifier("ho_f_char_arm2", "drawable", c.getPackageName() ) );
+        }
+
+        return imageList;
+    }
+
+    public static ArrayList<Integer> getLegImages( Context c ) {
+        // Build the player
+        DatabaseHelper db = DatabaseHelper.getInstance( c );
+        Player p = new Player( "TEMP" );
+
+        db.buildPlayer( p );
+
+        // Create the ArrayList
+        ArrayList<Integer> imageList = new ArrayList<Integer>();
+
+        if ( p.getHeadItem().equalsIgnoreCase( "Skeleton Pants" ) ) {
+            imageList.add( c.getResources().getIdentifier("ho_f_char_leg", "drawable", c.getPackageName() ) );
+            imageList.add( c.getResources().getIdentifier("ho_f_char_leg2", "drawable", c.getPackageName() ) );
+        } else {
+            imageList.add( c.getResources().getIdentifier("ho_f_char_leg", "drawable", c.getPackageName() ) );
+            imageList.add( c.getResources().getIdentifier("ho_f_char_leg2", "drawable", c.getPackageName() ) );
+        }
+
+        return imageList;
+    }
+
+    public static ArrayList<Integer> getFootImages( Context c ) {
+        // Build the player
+        DatabaseHelper db = DatabaseHelper.getInstance( c );
+        Player p = new Player( "TEMP" );
+
+        db.buildPlayer( p );
+
+        // Create the ArrayList
+        ArrayList<Integer> imageList = new ArrayList<Integer>();
+
+        if ( p.getHeadItem().equalsIgnoreCase( "Sandals" ) ) {
+            imageList.add( c.getResources().getIdentifier("ho_f_char_foot", "drawable", c.getPackageName() ) );
+            imageList.add( c.getResources().getIdentifier("ho_f_char_foot2", "drawable", c.getPackageName() ) );
+        } else {
+            imageList.add( c.getResources().getIdentifier("ho_f_char_foot", "drawable", c.getPackageName() ) );
+            imageList.add( c.getResources().getIdentifier("ho_f_char_foot2", "drawable", c.getPackageName() ) );
+        }
+
+        return imageList;
     }
 }

@@ -82,10 +82,14 @@ public class AdventureFragment extends Fragment {
         ImageView bg_layer2_2 = (ImageView) root.findViewById(R.id.bg_layer2_2);
         ImageView bg_layer3_2 = (ImageView) root.findViewById(R.id.bg_layer3_2);
 
+        ImageView char_head = (ImageView) root.findViewById(R.id.char_head);
+        ImageView char_torso = (ImageView) root.findViewById(R.id.char_torso);
         ImageView char_arm = (ImageView) root.findViewById(R.id.char_arm);
         ImageView char_arm_2 = (ImageView) root.findViewById(R.id.char_arm2);
         ImageView char_leg = (ImageView) root.findViewById(R.id.char_leg);
         ImageView char_leg_2 = (ImageView) root.findViewById(R.id.char_leg2);
+        ImageView char_foot = (ImageView) root.findViewById(R.id.char_foot);
+        ImageView char_foot_2 = (ImageView) root.findViewById(R.id.char_foot2);
 
         // Create animations
         Animation a_bg_layer1 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_bg_layer1 );
@@ -110,6 +114,16 @@ public class AdventureFragment extends Fragment {
         bg_layer3_2.setTranslationX( size.x );
 
         //Set image segment images
+        char_head.setImageResource( Item.getHeadImage( root.getContext() ) );
+        char_torso.setImageResource( Item.getBodyImages( root.getContext() ).get( 0 ) );
+        char_arm.setImageResource( Item.getBodyImages( root.getContext() ).get( 1 ) );
+        char_arm_2.setImageResource( Item.getBodyImages( root.getContext() ).get( 2 ) );
+        char_leg.setImageResource( Item.getLegImages( root.getContext() ).get( 0 ) );
+        char_leg_2.setImageResource( Item.getLegImages( root.getContext() ).get( 1 ) );
+        char_foot.setImageResource( Item.getFootImages( root.getContext() ).get( 0 ) );
+        char_foot_2.setImageResource( Item.getFootImages( root.getContext() ).get( 1 ) );
+
+        // Set image segment animations
         bg_layer1.setAnimation( a_bg_layer1 );
         bg_layer2.setAnimation( a_bg_layer2 );
         bg_layer3.setAnimation( a_bg_layer3 );
@@ -122,6 +136,8 @@ public class AdventureFragment extends Fragment {
         char_arm_2.setAnimation( a_char_arm2 );
         char_leg.setAnimation( a_char_leg );
         char_leg_2.setAnimation( a_char_leg2 );
+        char_foot.setAnimation( a_char_leg );
+        char_foot_2.setAnimation( a_char_leg2 );
 
         // Inflate the layout for this fragment
         return root;

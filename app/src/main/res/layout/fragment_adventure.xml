@@ -62,8 +62,24 @@
             android:scaleType="fitXY"
             android:adjustViewBounds="true"
             android:layout_centerHorizontal="true"
+            android:id="@+id/char_foot2"
+            android:src="@drawable/ho_f_char_foot2"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_centerHorizontal="true"
             android:id="@+id/char_leg2"
             android:src="@drawable/ho_f_char_leg2"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/char_foot"
+            android:src="@drawable/ho_f_char_foot"/>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
