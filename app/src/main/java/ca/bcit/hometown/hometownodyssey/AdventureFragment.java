@@ -119,6 +119,7 @@ public class AdventureFragment extends Fragment {
         bg_layer1_2.setTranslationX( size.x );
         bg_layer2_2.setTranslationX( size.x );
         bg_layer3_2.setTranslationX( size.x );
+        foreground_2.setTranslationX( size.x );
 
         //Set image segment images
         char_head.setImageResource( Item.getHeadImage( root.getContext() ) );

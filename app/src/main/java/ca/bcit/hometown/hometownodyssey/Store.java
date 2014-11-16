@@ -286,8 +286,8 @@ public class Store extends Activity implements AdventureFragment.OnFragmentInter
         // Head Items
         headItems.add(numHeadItems++, new Item("Jack-o-lantern", "Spoopy.", 0, 300,
                 getApplicationContext().getResources().getIdentifier("ho_icon_jackolantern", "drawable", getPackageName())));
-        headItems.add(numHeadItems++, new Item("Jack-o-lantern", "Spoopy.", 0, 300,
-                getApplicationContext().getResources().getIdentifier("ho_icon_jackolantern", "drawable", getPackageName())));
+        headItems.add(numHeadItems++, new Item("Clown Nose", "I'm a professional, I swear!", 0, 400,
+                getApplicationContext().getResources().getIdentifier("ho_icon_clownnose", "drawable", getPackageName())));
         headItems.add(numHeadItems++, new Item("Jack-o-lantern", "Spoopy.", 0, 300,
                 getApplicationContext().getResources().getIdentifier("ho_icon_jackolantern", "drawable", getPackageName())));
         headItems.add(numHeadItems++, new Item("Jack-o-lantern", "Spoopy.", 0, 300,
