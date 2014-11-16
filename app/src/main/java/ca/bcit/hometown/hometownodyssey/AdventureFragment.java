@@ -77,10 +77,13 @@ public class AdventureFragment extends Fragment {
         ImageView bg_layer1 = (ImageView) root.findViewById( R.id.bg_layer1 );
         ImageView bg_layer2 = (ImageView) root.findViewById( R.id.bg_layer2 );
         ImageView bg_layer3 = (ImageView) root.findViewById( R.id.bg_layer3 );
+        ImageView foreground = (ImageView) root.findViewById(R.id.fg_layer);
 
         ImageView bg_layer1_2 = (ImageView) root.findViewById(R.id.bg_layer1_2);
         ImageView bg_layer2_2 = (ImageView) root.findViewById(R.id.bg_layer2_2);
         ImageView bg_layer3_2 = (ImageView) root.findViewById(R.id.bg_layer3_2);
+        ImageView foreground_2 = (ImageView) root.findViewById(R.id.fg_layer_2);
+
 
         ImageView char_head = (ImageView) root.findViewById(R.id.char_head);
         ImageView char_torso = (ImageView) root.findViewById(R.id.char_torso);
@@ -91,13 +94,17 @@ public class AdventureFragment extends Fragment {
         ImageView char_foot = (ImageView) root.findViewById(R.id.char_foot);
         ImageView char_foot_2 = (ImageView) root.findViewById(R.id.char_foot2);
 
+
         // Create animations
         Animation a_bg_layer1 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_bg_layer1 );
         Animation a_bg_layer2 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_bg_layer2 );
         Animation a_bg_layer3 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_bg_layer3 );
+        Animation a_fg_grass = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_fg );
+
         Animation a_bg_layer1_2 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_bg_layer1 );
         Animation a_bg_layer2_2 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_bg_layer2 );
         Animation a_bg_layer3_2 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_bg_layer3 );
+        Animation a_fg_grass_2 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_fg );
 
         Animation a_char_arm = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_char_arm);
         Animation a_char_arm2 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_char_arm2);
@@ -127,10 +134,13 @@ public class AdventureFragment extends Fragment {
         bg_layer1.setAnimation( a_bg_layer1 );
         bg_layer2.setAnimation( a_bg_layer2 );
         bg_layer3.setAnimation( a_bg_layer3 );
+        foreground.setAnimation( a_fg_grass );
 
         bg_layer1_2.setAnimation( a_bg_layer1_2 );
         bg_layer2_2.setAnimation( a_bg_layer2_2 );
         bg_layer3_2.setAnimation( a_bg_layer3_2 );
+        foreground_2.setAnimation( a_fg_grass_2 );
+
 
         char_arm.setAnimation( a_char_arm );
         char_arm_2.setAnimation( a_char_arm2 );

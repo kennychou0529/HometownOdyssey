@@ -120,6 +120,23 @@
             android:layout_centerHorizontal="true"
             android:id="@+id/char_head"
             android:src="@drawable/ho_f_char_head"/>
-
     </RelativeLayout>
+
+    <!-- Foreground layer -->
+    <ImageView
+        android:layout_marginTop="7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ho_f_bg_grass"
+        android:id="@+id/fg_layer"/>
+    <ImageView
+        android:layout_marginTop="7dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ho_f_bg_grass"
+        android:id="@+id/fg_layer_2"/>
 </FrameLayout>

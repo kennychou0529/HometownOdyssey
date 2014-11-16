@@ -87,7 +87,7 @@ public class Item {
         db.buildPlayer( p );
 
         if ( p.getHeadItem().equalsIgnoreCase("Jack-o-lantern") ) {
-                return c.getResources().getIdentifier("ho_f_char_head", "drawable", c.getPackageName());
+                return c.getResources().getIdentifier("ho_f_char_jackolantern", "drawable", c.getPackageName());
         } else {
             return c.getResources().getIdentifier("ho_f_char_head", "drawable", c.getPackageName());
         }
@@ -103,10 +103,10 @@ public class Item {
         // Create the ArrayList
         ArrayList<Integer> imageList = new ArrayList<Integer>();
 
-        if ( p.getHeadItem().equalsIgnoreCase( "V-neck" ) ) {
-            imageList.add( c.getResources().getIdentifier("ho_f_char_torso", "drawable", c.getPackageName() ) );
-            imageList.add( c.getResources().getIdentifier("ho_f_char_arm", "drawable", c.getPackageName() ) );
-            imageList.add( c.getResources().getIdentifier("ho_f_char_arm2", "drawable", c.getPackageName() ) );
+        if ( p.getBodyItem().equalsIgnoreCase( "V-neck" ) ) {
+            imageList.add( c.getResources().getIdentifier("ho_f_char_vneck_torso", "drawable", c.getPackageName() ) );
+            imageList.add( c.getResources().getIdentifier("ho_f_char_vneck_arm", "drawable", c.getPackageName() ) );
+            imageList.add( c.getResources().getIdentifier("ho_f_char_vneck_arm2", "drawable", c.getPackageName() ) );
         } else {
             imageList.add( c.getResources().getIdentifier("ho_f_char_torso", "drawable", c.getPackageName() ) );
             imageList.add( c.getResources().getIdentifier("ho_f_char_arm", "drawable", c.getPackageName() ) );
@@ -126,9 +126,9 @@ public class Item {
         // Create the ArrayList
         ArrayList<Integer> imageList = new ArrayList<Integer>();
 
-        if ( p.getHeadItem().equalsIgnoreCase( "Skeleton Pants" ) ) {
-            imageList.add( c.getResources().getIdentifier("ho_f_char_leg", "drawable", c.getPackageName() ) );
-            imageList.add( c.getResources().getIdentifier("ho_f_char_leg2", "drawable", c.getPackageName() ) );
+        if ( p.getLegItem().equalsIgnoreCase( "Skeleton Pants" ) ) {
+            imageList.add( c.getResources().getIdentifier("ho_f_char_skeletonpants_leg", "drawable", c.getPackageName() ) );
+            imageList.add( c.getResources().getIdentifier("ho_f_char_skeletonpants_leg2", "drawable", c.getPackageName() ) );
         } else {
             imageList.add( c.getResources().getIdentifier("ho_f_char_leg", "drawable", c.getPackageName() ) );
             imageList.add( c.getResources().getIdentifier("ho_f_char_leg2", "drawable", c.getPackageName() ) );
@@ -147,9 +147,9 @@ public class Item {
         // Create the ArrayList
         ArrayList<Integer> imageList = new ArrayList<Integer>();
 
-        if ( p.getHeadItem().equalsIgnoreCase( "Sandals" ) ) {
-            imageList.add( c.getResources().getIdentifier("ho_f_char_foot", "drawable", c.getPackageName() ) );
-            imageList.add( c.getResources().getIdentifier("ho_f_char_foot2", "drawable", c.getPackageName() ) );
+        if ( p.getFootItem().equalsIgnoreCase( "Sandals" ) ) {
+            imageList.add( c.getResources().getIdentifier("ho_f_char_sandals_foot", "drawable", c.getPackageName() ) );
+            imageList.add( c.getResources().getIdentifier("ho_f_char_sandals_foot2", "drawable", c.getPackageName() ) );
         } else {
             imageList.add( c.getResources().getIdentifier("ho_f_char_foot", "drawable", c.getPackageName() ) );
             imageList.add( c.getResources().getIdentifier("ho_f_char_foot2", "drawable", c.getPackageName() ) );
