@@ -4,11 +4,11 @@
     android:interpolator="@android:anim/linear_interpolator"
     >
     <rotate
-        android:fromDegrees="30"
-        android:toDegrees="-30"
-        android:duration="3000"
-        android:pivotX="50%"
-        android:pivotY="50%"
+        android:fromDegrees="-40"
+        android:toDegrees="40"
+        android:duration="1000"
+        android:pivotX="49%"
+        android:pivotY="74.2%"
         android:repeatCount="infinite"
         android:repeatMode="reverse"
         />

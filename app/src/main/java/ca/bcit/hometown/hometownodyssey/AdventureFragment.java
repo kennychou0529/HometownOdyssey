@@ -95,8 +95,10 @@ public class AdventureFragment extends Fragment {
         Animation a_bg_layer2_2 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_bg_layer2 );
         Animation a_bg_layer3_2 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_bg_layer3 );
 
-        Animation a_char_left = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_char_left_1 );
-        Animation a_char_right = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_char_right_1 );
+        Animation a_char_arm = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_char_arm);
+        Animation a_char_arm2 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_char_arm2);
+        Animation a_char_leg = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_char_leg);
+        Animation a_char_leg2 = AnimationUtils.loadAnimation( root.getContext(), R.anim.anim_char_leg2);
 
         // Set image segment start offsets
         WindowManager wm = (WindowManager) root.getContext().getSystemService( Context.WINDOW_SERVICE );
@@ -116,10 +118,10 @@ public class AdventureFragment extends Fragment {
         bg_layer2_2.setAnimation( a_bg_layer2_2 );
         bg_layer3_2.setAnimation( a_bg_layer3_2 );
 
-        char_arm.setAnimation( a_char_left );
-        char_arm_2.setAnimation( a_char_right );
-        char_leg.setAnimation( a_char_right );
-        char_leg_2.setAnimation( a_char_left );
+        char_arm.setAnimation( a_char_arm );
+        char_arm_2.setAnimation( a_char_arm2 );
+        char_leg.setAnimation( a_char_leg );
+        char_leg_2.setAnimation( a_char_leg2 );
 
         // Inflate the layout for this fragment
         return root;
