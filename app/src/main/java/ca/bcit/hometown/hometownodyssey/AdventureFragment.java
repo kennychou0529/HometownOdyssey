@@ -36,6 +36,8 @@ public class AdventureFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    private View root;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -71,7 +73,7 @@ public class AdventureFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the view
-        View root = inflater.inflate(R.layout.fragment_adventure, container, false);
+        root = inflater.inflate(R.layout.fragment_adventure, container, false);
 
         // Get image references
         ImageView bg_layer1 = (ImageView) root.findViewById( R.id.bg_layer1 );
@@ -191,6 +193,26 @@ public class AdventureFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+    }
+
+    public void updateCharacter() {
+        ImageView char_head = (ImageView) root.findViewById(R.id.char_head);
+        ImageView char_torso = (ImageView) root.findViewById(R.id.char_torso);
+        ImageView char_arm = (ImageView) root.findViewById(R.id.char_arm);
+        ImageView char_arm_2 = (ImageView) root.findViewById(R.id.char_arm2);
+        ImageView char_leg = (ImageView) root.findViewById(R.id.char_leg);
+        ImageView char_leg_2 = (ImageView) root.findViewById(R.id.char_leg2);
+        ImageView char_foot = (ImageView) root.findViewById(R.id.char_foot);
+        ImageView char_foot_2 = (ImageView) root.findViewById(R.id.char_foot2);
+
+        char_head.setImageResource( Item.getHeadImage( root.getContext() ) );
+        char_torso.setImageResource( Item.getBodyImages( root.getContext() ).get( 0 ) );
+        char_arm.setImageResource( Item.getBodyImages( root.getContext() ).get( 1 ) );
+        char_arm_2.setImageResource( Item.getBodyImages( root.getContext() ).get( 2 ) );
+        char_leg.setImageResource( Item.getLegImages( root.getContext() ).get( 0 ) );
+        char_leg_2.setImageResource( Item.getLegImages( root.getContext() ).get( 1 ) );
+        char_foot.setImageResource( Item.getFootImages( root.getContext() ).get( 0 ) );
+        char_foot_2.setImageResource( Item.getFootImages( root.getContext() ).get( 1 ) );
     }
 
 }

@@ -1,6 +1,7 @@
 package ca.bcit.hometown.hometownodyssey;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +33,14 @@ public class Home extends Activity implements OnFragmentInteractionListener {
             db.savePlayerData(player);
         }
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        FragmentManager fm = getFragmentManager();
+        AdventureFragment ad = (AdventureFragment) fm.findFragmentById( R.id.adventure_fragment );
+        ad.updateCharacter();
     }
 
     @Override

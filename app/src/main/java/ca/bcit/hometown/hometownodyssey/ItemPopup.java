@@ -2,6 +2,7 @@ package ca.bcit.hometown.hometownodyssey;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
@@ -85,7 +86,11 @@ public class ItemPopup extends Dialog {
                             break;
                     }
 
+                    FragmentManager fm = ((Activity) context).getFragmentManager();
+                    AdventureFragment ad = (AdventureFragment) fm.findFragmentById( R.id.adventure_fragment );
+
                     db.savePlayerData( p );
+                    ad.updateCharacter();
                 }
 
             });
