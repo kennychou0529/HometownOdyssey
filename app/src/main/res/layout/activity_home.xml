@@ -14,54 +14,95 @@
         android:layout_gravity="top"
         tools:layout="@layout/fragment_adventure" />
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="35dp" />
+    <ImageView
+        android:layout_margin="10dp"
+        android:src="@drawable/ho_logo"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     
-    <GridLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:columnCount="2"
-        android:rowCount="3"
-        android:background="@color/bgColor">
+        android:background="@color/bgColor"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
 
-        <Button
-            android:text="@string/button_map"
-            android:background="@drawable/shape"
-            android:layout_width="110dp"
-            android:layout_height="100dp"
-            android:onClick="startActivityMap"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:layout_marginRight="@dimen/home_button_margin"
-            android:layout_marginBottom="@dimen/home_button_margin" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
 
-        <Button
-            android:text="@string/button_inventory"
-            android:background="@drawable/shape"
-            android:layout_width="110dp"
-            android:layout_height="100dp"
-            android:onClick="startActivityInventory"
-            android:layout_row="1"
-            android:layout_column="1" />
+            <ImageButton
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:src="@drawable/ho_icon_map"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:onClick="startActivityMap"
+                android:background="@null"
+                android:layout_marginEnd="@dimen/home_button_margin"
+                android:layout_marginBottom="@dimen/home_button_margin"
+                />
 
-        <Button
-            android:text="@string/button_store"
-            android:background="@drawable/shape"
-            android:layout_width="110dp"
-            android:layout_height="100dp"
-            android:onClick="startActivityShop"
-            android:layout_row="2"
-            android:layout_column="0" />
+            <ImageButton
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:text="@string/button_inventory"
+                android:src="@drawable/ho_icon_inventory"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:onClick="startActivityInventory"
+                android:layout_marginEnd="@dimen/home_button_margin"
+                android:layout_marginBottom="@dimen/home_button_margin"
+                />
 
-        <Button
-            android:text="@string/button_settings"
-            android:background="@drawable/shape"
-            android:layout_width="110dp"
-            android:layout_height="100dp"
-            android:onClick="startActivitySettings"
-            android:layout_row="2"
-            android:layout_column="1" />
-    </GridLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:src="@drawable/ho_icon_shop"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:onClick="startActivityShop"
+                android:layout_marginEnd="@dimen/home_button_margin"
+                android:layout_marginBottom="@dimen/home_button_margin"
+                />
+
+            <ImageButton
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:text="@string/button_settings"
+                android:src="@drawable/ho_icon_gear"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:background="@null"
+                android:onClick="startActivitySettings"
+                android:layout_marginEnd="@dimen/home_button_margin"
+                android:layout_marginBottom="@dimen/home_button_margin"
+             />
+
+            </LinearLayout>
+
+    </LinearLayout>
 </LinearLayout>

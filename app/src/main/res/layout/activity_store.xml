@@ -1,4 +1,4 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,34 +14,30 @@
         android:layout_gravity="top"
         tools:layout="@layout/fragment_adventure" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gold: 0"
-            android:id="@+id/store_gold"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true" />
-
-    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_below="@+id/adventure_fragment"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:text="Gold: 0"
+            android:id="@+id/store_gold"
+            />
+
         <ca.bcit.hometown.hometownodyssey.HorizontalListView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.25"
+            android:layout_weight="0.225"
             android:id="@+id/headListView"
             android:background="#D2DF69"
             android:orientation="horizontal"
@@ -55,7 +51,7 @@
         <ca.bcit.hometown.hometownodyssey.HorizontalListView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.25"
+            android:layout_weight="0.225"
             android:id="@+id/bodyListView"
             android:background="#D2DF69"
             android:orientation="horizontal"
@@ -69,7 +65,7 @@
         <ca.bcit.hometown.hometownodyssey.HorizontalListView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.25"
+            android:layout_weight="0.225"
             android:id="@+id/legListView"
             android:background="#D2DF69"
             android:orientation="horizontal"
@@ -83,7 +79,7 @@
         <ca.bcit.hometown.hometownodyssey.HorizontalListView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.25"
+            android:layout_weight="0.225"
             android:id="@+id/footListView"
             android:background="#D2DF69"
             android:orientation="horizontal"
@@ -94,4 +90,4 @@
             />
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>
