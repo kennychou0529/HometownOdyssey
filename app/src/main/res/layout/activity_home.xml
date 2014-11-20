@@ -32,9 +32,9 @@
         android:background="@color/bgColor"
         android:orientation="vertical"
         android:layout_marginTop="50dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="80dp">
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="50dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:src="@drawable/btn_style_map"
                 android:onClick="startActivityMap"
@@ -62,7 +62,7 @@
                 android:layout_weight="0.5"
                 android:text="@string/button_inventory"
                 android:src="@drawable/btn_style_inv"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:onClick="startActivityInventory"
                 android:background="@null"
@@ -85,7 +85,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="0.5"
                 android:src="@drawable/btn_style_shop"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:onClick="startActivityShop"
                 android:layout_marginEnd="40dp"
@@ -99,7 +99,7 @@
                 android:layout_weight="0.5"
                 android:text="@string/button_settings"
                 android:src="@drawable/btn_style_settings"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 android:adjustViewBounds="true"
                 android:onClick="startActivitySettings"
                 android:background="@null"
