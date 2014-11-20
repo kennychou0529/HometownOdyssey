@@ -5,7 +5,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="40dp"
-    android:background="@android:color/holo_green_light"
     >
 
     <ImageView
@@ -14,6 +13,7 @@
         android:layout_gravity="center_horizontal"
         android:id="@+id/gridImage"
         android:layout_weight="0.8"
+        android:background="@android:color/white"
         />
 
     <TextView
@@ -23,5 +23,6 @@
         android:layout_weight="0.2"
         android:gravity="center_horizontal"
         android:textSize="20sp"
+        android:background="@android:color/white"
         android:text=""/>
 </LinearLayout>

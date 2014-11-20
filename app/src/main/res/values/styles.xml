@@ -8,7 +8,7 @@
 
     <!-- Header Banner color -->
     <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">@color/titleBar</item>
+        <item name="android:background">@color/darkblue</item>
         <item name="android:titleTextStyle">@style/myTheme.ActionBar.Text</item>
     </style>
 

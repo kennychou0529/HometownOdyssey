@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/bgColor">
+    android:background="@color/gray">
 
     <fragment android:name="ca.bcit.hometown.hometownodyssey.AdventureFragment"
         android:id="@+id/adventure_fragment"
@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="#D2DF69"
+            android:background="@color/white"
             android:layout_margin="10dp"
             >
 
@@ -83,7 +83,8 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        android:background="#D2DF69"/>
+        android:verticalSpacing="10dp"
+        android:background="@color/gray"/>
 
     </LinearLayout>
 

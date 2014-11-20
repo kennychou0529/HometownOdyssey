@@ -165,9 +165,9 @@ public class Store extends Activity implements AdventureFragment.OnFragmentInter
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, null);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.shop_list_item, null);
             TextView shopItemName = (TextView) v.findViewById(R.id.shopItemName);
-            shopItemName.setText(headItems.get(position).getName());
+            //shopItemName.setText(headItems.get(position).getName());
 
             ImageView shopItemImage = (ImageView) v.findViewById(R.id.shopItemImage);
 
@@ -199,9 +199,9 @@ public class Store extends Activity implements AdventureFragment.OnFragmentInter
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, null);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.shop_list_item, null);
             TextView shopItemName = (TextView) v.findViewById(R.id.shopItemName);
-            shopItemName.setText(bodyItems.get(position).getName());
+            //shopItemName.setText(bodyItems.get(position).getName());
 
             ImageView shopItemImage = (ImageView) v.findViewById(R.id.shopItemImage);
 
@@ -233,9 +233,9 @@ public class Store extends Activity implements AdventureFragment.OnFragmentInter
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, null);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.shop_list_item, null);
             TextView shopItemName = (TextView) v.findViewById(R.id.shopItemName);
-            shopItemName.setText(legItems.get(position).getName());
+            //shopItemName.setText(legItems.get(position).getName());
 
             ImageView shopItemImage = (ImageView) v.findViewById(R.id.shopItemImage);
 
@@ -267,9 +267,9 @@ public class Store extends Activity implements AdventureFragment.OnFragmentInter
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, null);
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.shop_list_item, null);
             TextView shopItemName = (TextView) v.findViewById(R.id.shopItemName);
-            shopItemName.setText(footItems.get(position).getName());
+            //shopItemName.setText(footItems.get(position).getName());
 
             ImageView shopItemImage = (ImageView) v.findViewById(R.id.shopItemImage);
 

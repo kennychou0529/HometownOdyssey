@@ -84,7 +84,10 @@ public class ItemPopup extends Dialog {
                             footButton.setImageResource( currItem.getImage() );
                             p.setFootItem(currItem.getName());
                             break;
+
+
                     }
+                    dismiss();
 
                     FragmentManager fm = ((Activity) context).getFragmentManager();
                     AdventureFragment ad = (AdventureFragment) fm.findFragmentById( R.id.adventure_fragment );

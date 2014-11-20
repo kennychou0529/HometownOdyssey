@@ -246,7 +246,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
             for(int i=0;i<getChildCount();i++){
                 View child = getChildAt(i);
                 int childWidth = child.getMeasuredWidth();
-                child.layout(left, 0, left + childWidth, child.getMeasuredHeight());
+                child.layout(left, 0, left + childWidth, child.getMeasuredHeight() );
                 //add white space between items
                 left += childWidth;
             }
