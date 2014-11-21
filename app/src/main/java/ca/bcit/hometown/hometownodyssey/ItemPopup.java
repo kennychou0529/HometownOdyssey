@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -46,6 +47,10 @@ public class ItemPopup extends Dialog {
             TextView title =  (TextView) findViewById(R.id.popupTitle);
             title.setText(currItem.getName());
 
+            Typeface titleTypeface = Typeface.createFromAsset( context.getAssets(), "header.ttf" );
+            title.setTypeface( titleTypeface );
+
+
             //change description to item's special description
             TextView description=  (TextView) findViewById(R.id.descriptionText);
             description.setText(currItem.getText());
@@ -53,6 +58,9 @@ public class ItemPopup extends Dialog {
 
             Button selectableBtn = (Button) findViewById(R.id.selectableButton);
             selectableBtn.setText("EQUIP THIS ITEM!");
+            selectableBtn.setTypeface( titleTypeface );
+
+
             selectableBtn.setOnClickListener(new View.OnClickListener() {
 
                 @Override

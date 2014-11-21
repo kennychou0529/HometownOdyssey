@@ -1,10 +1,13 @@
 package ca.bcit.hometown.hometownodyssey;
 
+import android.graphics.Typeface;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -32,6 +35,10 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+
+        Button homeBtn = (Button) findViewById( R.id.homeBtn );
+        Typeface titleTypeface = Typeface.createFromAsset( getAssets(), "header.ttf" );
+        homeBtn.setTypeface( titleTypeface );
 
         Calendar c = Calendar.getInstance();
         int date = c.get(Calendar.DATE);
@@ -67,9 +74,13 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
                 mapSettings.setMap(map);
             }
 
+            // Set the first-time home location
+            if (player.getHome().latitude == 0) {
+                player.setHome( player.getPos() );
 
-            // Set the player's home
-            mapSettings.setHome(player.getPos());
+                // Set the player's home
+                mapSettings.setHome(player.getPos());
+            }
 
             Log.d("Player date: " ,  "" + player.getDate());
             Log.d("date: " ,  "" + date);
@@ -81,6 +92,8 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
                  Log.d("Player date: " ,  "" + player.getDate());
                  db.savePlayerData(player);
 
+                 mapSettings.createTreasure(2000, 0);
+                 mapSettings.createTreasure(2000, 0);
                  mapSettings.createTreasure(2000, 0);
                  mapSettings.createTreasure(2000, 0);
                  mapSettings.createTreasure(2000, 0);
@@ -158,6 +171,14 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
         db.saveTreasureData(t);
     }
 
+    public void setHome( View view ) {
+        // Set the player's home
+        player.setHome( player.getPos() );
+        mapSettings.setHome(player.getPos());
+
+        Toast.makeText( this, "Home set!", Toast.LENGTH_SHORT ).show();
+
+    }
 
     public void onFragmentInteraction(Uri uri) {
         // Does nothing currently

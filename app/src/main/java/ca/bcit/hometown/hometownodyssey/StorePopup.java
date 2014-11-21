@@ -3,6 +3,7 @@ package ca.bcit.hometown.hometownodyssey;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -47,6 +48,10 @@ public class StorePopup extends Dialog {
         TextView title =  (TextView) findViewById(R.id.popupTitle);
         title.setText(currItem.getName());
 
+        Typeface titleTypeface = Typeface.createFromAsset( context.getAssets(), "header.ttf" );
+        title.setTypeface( titleTypeface );
+
+
         //change description to item's special description
         TextView description =  (TextView) findViewById(R.id.descriptionText);
         description.setText(currItem.getText());
@@ -57,6 +62,7 @@ public class StorePopup extends Dialog {
 
         Button buyBttn = (Button) findViewById(R.id.buyButton);
         buyBttn.setText("Purchase " + currItem.getName());
+        buyBttn.setTypeface( titleTypeface );
 
         buyBttn.setOnClickListener(new View.OnClickListener() {
             @Override

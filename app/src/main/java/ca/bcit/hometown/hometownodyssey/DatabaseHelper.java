@@ -37,6 +37,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String KEY_LEVEL = "level";
     private static final String KEY_NAME = "name";
     private static final String KEY_DATE = "currentDate";
+    private static final String KEY_HOME_LAT = "homeLat";
+    private static final String KEY_HOME_LONG = "homeLong";
 
     //Inventory table rows
     private static final String KEY_TYPE = "_type";
@@ -61,7 +63,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             KEY_HEAD_ITEM + " TEXT , " +
             KEY_BODY_ITEM + " TEXT , " +
             KEY_LEG_ITEM + " TEXT , " +
-            KEY_FOOT_ITEM + " TEXT );";
+            KEY_FOOT_ITEM + " TEXT, " +
+            KEY_HOME_LAT + " REAL, " +
+            KEY_HOME_LONG + " REAL);";
 
     private static final String INVENTORY_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + INVENTORY_TABLE_NAME + "("  +
             KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -127,6 +131,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_LEG_ITEM, p.getLegItem());
         values.put(KEY_FOOT_ITEM, p.getFootItem());
         values.put(KEY_DATE, p.getDate());
+        values.put(KEY_HOME_LAT, p.getHome().latitude);
+        values.put(KEY_HOME_LONG, p.getHome().longitude);
 
        if (cursor.getCount() < 1)
        {
@@ -218,6 +224,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             p.setFootItem(cursor.getString(0));
         }
 
+        // Player Home Latitude
+        double lat = 0;
+
+        cursor = db.rawQuery("SELECT " + KEY_HOME_LAT + " FROM " + PLAYER_TABLE_NAME, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            lat = cursor.getDouble(0);
+        }
+
+        // Player Home Longitude
+        double lon = 0;
+
+        cursor = db.rawQuery("SELECT " + KEY_HOME_LONG + " FROM " + PLAYER_TABLE_NAME, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            lon = cursor.getDouble(0);
+        }
+
+        p.setHome( new LatLng(lat, lon) );
 
         db.close();
     }

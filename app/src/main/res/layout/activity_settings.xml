@@ -15,42 +15,48 @@
         android:layout_gravity="top"
         tools:layout="@layout/fragment_adventure" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:gravity="center_horizontal"
-        android:paddingTop="20dp"
-        android:orientation="vertical">
-        <Button
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:text="Clear Data"
-            android:onClick="clearData"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="30dp" />
-        
-        <TextView
+        android:layout_height="wrap_content">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:gravity="center_horizontal"
-            android:textSize="35sp"
-            android:text="ABOUT"/>
+            android:paddingTop="20dp"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Clear Data"
+                android:onClick="clearData"
+                android:id="@+id/clearBtn"/>
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:textSize="20sp"
-            android:text="@string/about"/>
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="35sp"
+                android:text="ABOUT"
+                android:id="@+id/titleAbout"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textSize="20sp"
+                android:text="@string/about"/>
+        </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

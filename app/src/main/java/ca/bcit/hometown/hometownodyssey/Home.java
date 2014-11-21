@@ -13,12 +13,18 @@ import ca.bcit.hometown.hometownodyssey.AdventureFragment.OnFragmentInteractionL
 
 public class Home extends Activity implements OnFragmentInteractionListener {
 
+    // Override the default font
+
     private Player player = new Player("TEMP");
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Override the default font
+        TypefaceUtil.overrideFont(getApplicationContext(), "SERIF", "body.ttf");
+
         setContentView(R.layout.activity_home);
 
         DatabaseHelper db = DatabaseHelper.getInstance(this);
@@ -29,7 +35,6 @@ public class Home extends Activity implements OnFragmentInteractionListener {
             db.savePlayerData(player);
         } else {
             player.setPlayerName("CHRISTOFER");
-            player.addMoney( 2000 );
             db.savePlayerData(player);
         }
 

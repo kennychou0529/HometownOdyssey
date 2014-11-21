@@ -22,6 +22,7 @@ public class Player implements Serializable {
     private String bodyItem;
     private String legItem;
     private String footItem;
+    private LatLng home;
 
     /**
      * Default Player constructor
@@ -30,12 +31,13 @@ public class Player implements Serializable {
      */
     public Player(String n) {
         name = n;
-        money = 0;
+        money = 1000;
         level = 1;
         headItem = "";
         bodyItem = "";
         legItem = "";
         footItem = "";
+        home = new LatLng( 0, 0 );
     }
 
     public void updateMapPosition() {
@@ -130,6 +132,14 @@ public class Player implements Serializable {
      */
     public void setPos(LatLng p) {
         pos = p;
+    }
+
+    public void setHome(LatLng p) {
+        home = p;
+    }
+
+    public LatLng getHome() {
+        return home;
     }
 
     public void setMap(GoogleMap m) {

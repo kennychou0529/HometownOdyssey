@@ -33,6 +33,8 @@
             android:layout_weight="1"
             android:background="@drawable/btn_style_default"
             android:text="Set Home"
+            android:onClick="setHome"
+            android:id="@+id/homeBtn"
             android:textColor="@color/white"
             android:textStyle="bold"
              />

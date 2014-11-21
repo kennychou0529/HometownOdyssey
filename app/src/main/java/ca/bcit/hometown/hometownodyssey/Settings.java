@@ -2,13 +2,15 @@ package ca.bcit.hometown.hometownodyssey;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
-
 
 import ca.bcit.hometown.hometownodyssey.AdventureFragment.OnFragmentInteractionListener;
 
@@ -18,6 +20,13 @@ public class Settings extends Activity implements OnFragmentInteractionListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        TextView title = (TextView) findViewById( R.id.titleAbout );
+        Button clearBtn = (Button) findViewById( R.id.clearBtn );
+        Typeface titleTypeface = Typeface.createFromAsset( getAssets(), "header.ttf" );
+        title.setTypeface( titleTypeface );
+        clearBtn.setTypeface( titleTypeface );
+
     }
 
 
