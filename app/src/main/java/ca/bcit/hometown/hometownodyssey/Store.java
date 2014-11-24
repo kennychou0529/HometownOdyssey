@@ -290,29 +290,29 @@ public class Store extends Activity implements AdventureFragment.OnFragmentInter
                 getApplicationContext().getResources().getIdentifier("ho_icon_clownnose", "drawable", getPackageName())));
         headItems.add(numHeadItems++, new Item("Jack-o-lantern", "Spoopy.", 0, 300,
                 getApplicationContext().getResources().getIdentifier("ho_icon_jackolantern", "drawable", getPackageName())));
-        headItems.add(numHeadItems++, new Item("Jack-o-lantern", "Spoopy.", 0, 300,
-                getApplicationContext().getResources().getIdentifier("ho_icon_jackolantern", "drawable", getPackageName())));
+        headItems.add(numHeadItems++, new Item("Clown Nose", "I'm a professional, I swear!", 0, 400,
+                getApplicationContext().getResources().getIdentifier("ho_icon_clownnose", "drawable", getPackageName())));
 
         // Body Items
         bodyItems.add(numBodyItems++, new Item("V-neck", "Everyone loves V-necks!", 1, 150,
                 getApplicationContext().getResources().getIdentifier("ho_icon_vneck", "drawable", getPackageName())));
+        bodyItems.add(numBodyItems++, new Item("Towel", "Don't forget to bring a towel.", 1, 50,
+                getApplicationContext().getResources().getIdentifier("ho_icon_towel", "drawable", getPackageName())));
         bodyItems.add(numBodyItems++, new Item("V-neck", "Everyone loves V-necks!", 1, 150,
                 getApplicationContext().getResources().getIdentifier("ho_icon_vneck", "drawable", getPackageName())));
-        bodyItems.add(numBodyItems++, new Item("V-neck", "Everyone loves V-necks!", 1, 150,
-                getApplicationContext().getResources().getIdentifier("ho_icon_vneck", "drawable", getPackageName())));
-        bodyItems.add(numBodyItems++, new Item("V-neck", "Everyone loves V-necks!", 1, 150,
-                getApplicationContext().getResources().getIdentifier("ho_icon_vneck", "drawable", getPackageName())));
+        bodyItems.add(numBodyItems++, new Item("Towel", "Don't forget to bring a towel.", 1, 50,
+                getApplicationContext().getResources().getIdentifier("ho_icon_towel", "drawable", getPackageName())));
 
 
         // Leg Items
         legItems.add(numLegItems++, new Item("Skeleton Pants", "You're looking a little thin.", 2, 200,
                 getApplicationContext().getResources().getIdentifier("ho_icon_skeletonpants", "drawable", getPackageName())));
+        legItems.add(numLegItems++, new Item("Tall Socks", "Work those legs, gurlfrend.", 2, 400,
+                getApplicationContext().getResources().getIdentifier("ho_icon_tallsocks", "drawable", getPackageName())));
         legItems.add(numLegItems++, new Item("Skeleton Pants", "You're looking a little thin.", 2, 200,
                 getApplicationContext().getResources().getIdentifier("ho_icon_skeletonpants", "drawable", getPackageName())));
-        legItems.add(numLegItems++, new Item("Skeleton Pants", "You're looking a little thin.", 2, 200,
-                getApplicationContext().getResources().getIdentifier("ho_icon_skeletonpants", "drawable", getPackageName())));
-        legItems.add(numLegItems++, new Item("Skeleton Pants", "You're looking a little thin.", 2, 200,
-                getApplicationContext().getResources().getIdentifier("ho_icon_skeletonpants", "drawable", getPackageName())));
+        legItems.add(numLegItems++, new Item("Tall Socks", "Work those legs, gurlfrend.", 2, 400,
+                getApplicationContext().getResources().getIdentifier("ho_icon_tallsocks", "drawable", getPackageName())));
 
 
         // Foot Items

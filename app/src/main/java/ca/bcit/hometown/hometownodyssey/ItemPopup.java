@@ -73,7 +73,6 @@ public class ItemPopup extends Dialog {
                     switch( currItem.getType() ) {
                         case 0:
                             ImageButton headButton = (ImageButton) ((Activity) context).findViewById( R.id.headInv );
-                            headButton.setImageResource( R.drawable.temptop );
                             headButton.setImageResource( currItem.getImage() );
                             p.setHeadItem( currItem.getName() );
                             break;

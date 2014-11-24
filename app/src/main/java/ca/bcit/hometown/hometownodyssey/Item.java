@@ -118,7 +118,13 @@ public class Item {
                 imageList.add(c.getResources().getIdentifier("ho_f_char_vneck_torso", "drawable", c.getPackageName()));
                 imageList.add(c.getResources().getIdentifier("ho_f_char_vneck_arm", "drawable", c.getPackageName()));
                 imageList.add(c.getResources().getIdentifier("ho_f_char_vneck_arm2", "drawable", c.getPackageName()));
-            } else {
+            }
+            else if (p.getBodyItem().equalsIgnoreCase("Towel")) {
+                imageList.add(c.getResources().getIdentifier("ho_f_char_towel_torso", "drawable", c.getPackageName()));
+                imageList.add(c.getResources().getIdentifier("ho_f_char__arm", "drawable", c.getPackageName()));
+                imageList.add(c.getResources().getIdentifier("ho_f_char__arm2", "drawable", c.getPackageName()));
+            }
+            else {
                 imageList.add(c.getResources().getIdentifier("ho_f_char_torso", "drawable", c.getPackageName()));
                 imageList.add(c.getResources().getIdentifier("ho_f_char_arm", "drawable", c.getPackageName()));
                 imageList.add(c.getResources().getIdentifier("ho_f_char_arm2", "drawable", c.getPackageName()));
@@ -145,6 +151,10 @@ public class Item {
             if (p.getLegItem().equalsIgnoreCase("Skeleton Pants")) {
                 imageList.add(c.getResources().getIdentifier("ho_f_char_skeletonpants_leg", "drawable", c.getPackageName()));
                 imageList.add(c.getResources().getIdentifier("ho_f_char_skeletonpants_leg2", "drawable", c.getPackageName()));
+            }
+            else if (p.getLegItem().equalsIgnoreCase("Tall Socks")) {
+                imageList.add(c.getResources().getIdentifier("ho_f_char_tallsocks_leg", "drawable", c.getPackageName()));
+                imageList.add(c.getResources().getIdentifier("ho_f_char_tallsocks_leg2", "drawable", c.getPackageName()));
             } else {
                 imageList.add(c.getResources().getIdentifier("ho_f_char_leg", "drawable", c.getPackageName()));
                 imageList.add(c.getResources().getIdentifier("ho_f_char_leg2", "drawable", c.getPackageName()));
