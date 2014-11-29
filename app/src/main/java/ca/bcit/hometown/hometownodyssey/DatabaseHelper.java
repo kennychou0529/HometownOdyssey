@@ -299,7 +299,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         double lat = t.getPin().getPosition().latitude;
         double lon = t.getPin().getPosition().longitude;
 
-        db.delete(TREASURE_TABLE_NAME, KEY_LAT + "=" + lat + "AND" +
+        db.delete(TREASURE_TABLE_NAME, KEY_LAT + "=" + lat + " AND " +
                 KEY_LONG + "=" + lon, null);
 
         db.close();

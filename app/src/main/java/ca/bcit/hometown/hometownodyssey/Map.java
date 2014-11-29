@@ -164,7 +164,10 @@ public class Map extends FragmentActivity implements GooglePlayServicesClient.Co
 
         }
 
-    public Player getPlayer() { return player; };
+    public Player getPlayer() {
+        db.buildPlayer( player );
+        return player;
+    };
     public MapSettings getMapSettings() { return mapSettings; };
 
     public void saveTreasure(Treasure t) {

@@ -65,12 +65,17 @@ public class MapSettings implements Serializable {
                 switch(treasures[i].getType()) {
                     case 0: // Money
                         player.addMoney(100);
+
                         break;
                     case 1: // Item
                         break;
                     case 2: // Special item
                         break;
                 }
+
+                DatabaseHelper db = DatabaseHelper.getInstance( mapAct );
+
+                db.savePlayerData( player );
 
                 // Remove the treasure
                 removeTreasure(i);
